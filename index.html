@@ -60,6 +60,16 @@ label.consent-check input[type="checkbox"] { margin-top: 0; }  /* เดิม 2
 .hidden { display:none; }
 .footer { padding:16px; text-align:center; color:#666; font-size:12px; }
 .total-line { font-weight:800; }
+/* ยกเว้น checkbox/radio ไม่ให้ width:100% */
+input[type="checkbox"], input[type="radio"] { width: auto; }
+
+/* จัด consent ให้ชิดกัน */
+label.consent-check { display:flex; gap:8px; align-items:center; }
+label.consent-check input[type="checkbox"] { margin-top:0; flex:0 0 auto; }
+label.consent-check span { flex:1 1 auto; }
+
+/* ช่องไฟก่อน checkbox */
+.consent-desc { margin-bottom: 10px; }
 </style>
 </head>
 <body>
