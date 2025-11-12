@@ -28,8 +28,9 @@ input:focus, select:focus { border-color:var(--primary); box-shadow:0 0 0 3px rg
 .thank { text-align:center; padding:48px 20px; color:#fff; background:linear-gradient(135deg, var(--primary), #ff8c4a); }
 .complete { text-align:center; padding:48px 20px; color:#fff; background:linear-gradient(135deg, var(--ok), #4ade80); }
 .consent-desc { line-height:1.55; margin-bottom:10px; }
-label.consent-check { display:flex; gap:8px; align-items:flex-start; line-height:1.4; }
-label.consent-check input[type="checkbox"] { margin-top:2px; }
+label.consent-check { gap: 6px; align-items: center; }   /* เดิม align-items:flex-start */
+label.consent-check input[type="checkbox"] { margin-top: 0; }  /* เดิม 2px */
+.consent-desc { margin-bottom: 10px; }  /* ระยะห่างก่อน checkbox */
 .pay-choice { display:inline-flex; align-items:center; gap:6px; margin-right:16px; }
 .note { color:#666; font-size:12px; }
 .hidden { display:none; }
