@@ -7,6 +7,30 @@
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="data:," />
   <style>
+    <style>
+/* ===== ปรับตำแหน่ง Consent ให้ช่องติ๊กกับข้อความอยู่ชิดกัน ===== */
+.consent-check {
+  display: flex;
+  align-items: center;     /* จัดให้อยู่แนวเดียวกัน */
+  gap: 10px;               /* ระยะห่างเล็กน้อยระหว่างช่องติ๊กกับข้อความ */
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.consent-check input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+.consent-check span {
+  flex: 1 1 auto;
+  white-space: normal;       /* ให้ตัดบรรทัดได้ปกติ */
+  margin: 0;
+  text-align: left;
+}
+</style>
     :root{
       --primary:#f37021; --text:#111; --muted:#666; --bg:#fff; --border:#ececec; --ok:#16a34a; --err:#dc2626; --card:#fff;
     }
