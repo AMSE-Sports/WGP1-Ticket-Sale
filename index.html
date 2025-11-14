@@ -11,10 +11,8 @@
     const SUPABASE_URL = 'https://ublogcckdylmiehzqsuh.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVibG9nY2NrZHlsbWllaHpxc3VoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI5NjQ4NzQsImV4cCI6MjA3ODU0MDg3NH0.v9sp9NzJBQ1DopdtMarwdTX3KMl8DNXY176zCUCAhx0';
 
-    // client ตัวนี้คือสิ่งที่เราจะใช้ insert ข้อมูลเข้า Supabase
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // ฟังก์ชันยิงข้อมูลเข้า Supabase
     async function submitToSupabase(payload) {
       const { visitor, staff, submittedAt } = payload;
 
@@ -47,69 +45,272 @@
   </script>
 
   <style>
-    :root { --primary:#f37021; --border:#ececec; --ok:#16a34a; }
+    :root {
+      --primary:#f37021;
+      --border:#ececec;
+      --ok:#16a34a;
+
+      /* ขยายฟอนต์ให้ใหญ่ขึ้น */
+      --font-base:   clamp(18px, 2vw, 22px);
+      --font-label:  clamp(17px, 1.9vw, 21px);
+      --font-title:  clamp(24px, 2.6vw, 32px);
+      --font-note:   clamp(14px, 1.6vw, 18px);
+    }
+
     * { box-sizing:border-box; }
-    body { margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; background:#fafafa; color:#111; }
+
+    body {
+      margin:0;
+      font-family:system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background:#fafafa;
+      color:#111;
+      font-size:var(--font-base);
+      width:100%;
+      min-height:100vh;
+    }
+
     .header { background:#000; }
     .header img { display:block; width:100%; height:auto; }
-    .container { max-width:960px; margin:0 auto; padding:16px; }
-    .screen { min-height:100vh; display:flex; flex-direction:column; gap:16px; }
-    .card { background:#fff; border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow:0 10px 24px -18px rgba(0,0,0,.25); }
-    .head { padding:16px; border-bottom:1px solid var(--border); }
-    .body { padding:16px; }
-    .row { display:grid; grid-template-columns:1fr; gap:12px; }
-    @media (min-width:760px) { .row.two { grid-template-columns:1fr 1fr; } }
-    label.title { font-weight:800; font-size:13px; margin-bottom:6px; display:block; }
-    label .en { font-weight:600; color:#555; margin-left:2px; }
-    input, select { width:100%; padding:12px; border-radius:12px; border:1px solid var(--border); outline:none; background:#fff; }
-    input:focus, select:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(243,112,33,.2); }
-    .btn { display:inline-flex; align-items:center; justify-content:center; font-weight:800; border:0; padding:16px 20px; border-radius:16px; cursor:pointer; }
-    .btn.primary { background:var(--primary); color:#fff; box-shadow:0 10px 24px -16px rgba(243,112,33,.85); }
+
+    /* ให้ฟอร์มเต็มหน้าจอทุกอุปกรณ์ */
+    .container {
+      width:100%;
+      max-width:none;
+      margin:0;
+      padding:0;
+    }
+
+    .screen {
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .card {
+      width:100%;
+      background:#fff;
+      border-radius:0;
+      border:0;
+      box-shadow:none;
+    }
+
+    .head {
+      padding:24px 20px;
+      border-bottom:1px solid var(--border);
+    }
+    .head h2 {
+      margin:0;
+      font-size:var(--font-title);
+      font-weight:900;
+    }
+
+    .body { padding:24px 20px; }
+
+    .row {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      margin-bottom:16px;
+    }
+    @media (min-width:760px) {
+      .row.two { grid-template-columns:1fr 1fr; }
+    }
+
+    label.title {
+      font-weight:800;
+      font-size:var(--font-label);
+      margin-bottom:6px;
+      display:block;
+    }
+    label .en {
+      font-weight:600;
+      color:#555;
+      margin-left:4px;
+      font-size:calc(var(--font-label) - 1px);
+    }
+
+    input, select {
+      width:100%;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      outline:none;
+      background:#fff;
+      font-family:inherit;
+      font-size:var(--font-base);
+    }
+    input:focus, select:focus {
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(243,112,33,.2);
+    }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      border:0;
+      padding:18px 24px;
+      border-radius:16px;
+      cursor:pointer;
+      font-size:var(--font-base);
+    }
+    .btn.primary {
+      background:var(--primary);
+      color:#fff;
+      box-shadow:0 10px 24px -16px rgba(243,112,33,.85);
+    }
     .btn.dark { background:#111; color:#fff; }
-    .btn.wide { width:100%; font-size:16px; }
+    .btn.wide { width:100%; }
 
     .thank {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #fff;
-      background: linear-gradient(135deg, #f37021, #ff8c4a);
-      padding: 60px 20px;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:#fff;
+      background:linear-gradient(135deg, #f37021, #ff8c4a);
+      padding:60px 20px;
     }
     .thank h2 {
-      font-size: 48px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      margin-bottom: 24px;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      font-size:clamp(32px, 5vw, 60px);
+      font-weight:900;
+      letter-spacing:1px;
+      margin-bottom:24px;
+      text-shadow:0 4px 20px rgba(0,0,0,0.3);
     }
     .thank p {
-      max-width: 720px;
-      font-size: 22px;
-      line-height: 1.5;
-      font-weight: 500;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      max-width:720px;
+      font-size:clamp(18px, 2.2vw, 24px);
+      line-height:1.5;
+      font-weight:500;
+      text-shadow:0 2px 8px rgba(0,0,0,0.2);
     }
-    .complete { text-align:center; padding:48px 20px; color:#fff; background:linear-gradient(135deg, var(--ok), #4ade80); }
-    .consent-desc { line-height:1.55; margin-bottom:10px; }
-    .pay-choice { display:inline-flex; align-items:center; gap:6px; margin-right:16px; }
-    .note { color:#666; font-size:12px; }
-    .hidden { display:none; }
-    .footer { padding:16px; text-align:center; color:#666; font-size:12px; }
+
+    .complete {
+      text-align:center;
+      padding:48px 20px;
+      color:#fff;
+      background:linear-gradient(135deg, var(--ok), #4ade80);
+    }
+
+    .pay-choice {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-right:18px;
+      font-size:var(--font-base);
+    }
+
+    .note {
+      color:#666;
+      font-size:var(--font-note);
+    }
+
+    .hidden { display:none !important; }
+
+    .footer {
+      padding:12px 16px;
+      text-align:center;
+      color:#666;
+      font-size:var(--font-note);
+    }
+
     .total-line { font-weight:800; }
-    /* ยกเว้น checkbox/radio ไม่ให้ width:100% */
-    input[type="checkbox"], input[type="radio"] { width: auto; }
 
-    /* จัด consent ให้ชิดกัน */
-    label.consent-check { display:flex; gap:8px; align-items:center; }
-    label.consent-check input[type="checkbox"] { margin-top:0; flex:0 0 auto; }
-    label.consent-check span { flex:1 1 auto; }
+    input[type="checkbox"],
+    input[type="radio"] {
+      width:auto;
+      accent-color:var(--primary);
+    }
 
-    /* ช่องไฟก่อน checkbox */
-    .consent-desc { margin-bottom: 10px; }
+    /* Consent checkbox 2 บรรทัด + ขนาดพอ ๆ กับตัวหนังสือ */
+    label.consent-check {
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      font-size:var(--font-base);
+      margin-top:8px;
+    }
+    label.consent-check input[type="checkbox"] {
+      flex:0 0 auto;
+      width:1.25em;
+      height:1.25em;
+      margin-top:0.25em;
+    }
+    label.consent-check span {
+      flex:1 1 auto;
+      line-height:1.5;
+    }
+    .consent-desc { margin-bottom:10px; }
+
+    /* ปุ่มอ่านรายละเอียด */
+    .link-btn {
+      border:0;
+      background:none;
+      padding:0;
+      margin-left:6px;
+      color:var(--primary);
+      cursor:pointer;
+      text-decoration:underline;
+      font-size:var(--font-note);
+      font-weight:600;
+    }
+
+    /* Modal แสดงรายละเอียด Consent */
+    .modal {
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:50;
+    }
+    .modal-backdrop {
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+    }
+    .modal-content {
+      position:relative;
+      max-width:900px;
+      max-height:80vh;
+      width:90%;
+      background:#fff;
+      border-radius:18px;
+      padding:24px 20px;
+      box-shadow:0 18px 40px rgba(0,0,0,0.4);
+      overflow:auto;
+      font-size:var(--font-base);
+    }
+    .modal-content h3 {
+      margin-top:0;
+      margin-bottom:10px;
+      font-size:clamp(20px, 2.4vw, 26px);
+      font-weight:800;
+    }
+    .modal-content h4 {
+      margin-top:16px;
+      margin-bottom:6px;
+      font-size:clamp(17px, 2.1vw, 22px);
+      font-weight:700;
+    }
+    .modal-content p {
+      margin:4px 0 10px;
+      line-height:1.6;
+    }
+    .modal-close {
+      position:absolute;
+      top:10px;
+      right:12px;
+      border:0;
+      background:transparent;
+      font-size:28px;
+      line-height:1;
+      cursor:pointer;
+    }
   </style>
 </head>
 <body>
@@ -120,7 +321,10 @@
   <!-- SCREEN 1: VISITOR -->
   <section id="screen-visitor" class="screen container">
     <div class="card">
-      <div class="head"><h2 style="margin:0">ส่วนที่ 1 — ผู้ชม (Visitor)</h2></div>
+      <div class="head">
+        <h2>ส่วนที่ 1 — ผู้ชม (Visitor)</h2>
+      </div>
+
       <form class="body" id="visitor-form">
         <div class="row">
           <div>
@@ -128,6 +332,7 @@
             <input id="v-email" type="email" required placeholder="name@example.com">
           </div>
         </div>
+
         <div class="row two">
           <div>
             <label class="title">ชื่อจริง<span class="en">/ First Name</span> *</label>
@@ -138,6 +343,7 @@
             <input id="v-last" required>
           </div>
         </div>
+
         <div class="row two">
           <div>
             <label class="title">เพศ<span class="en">/ Gender</span> *</label>
@@ -160,11 +366,13 @@
             </select>
           </div>
         </div>
+
         <div class="row two">
           <div>
             <label class="title">ประเทศที่อาศัย<span class="en">/ Country of Residence</span> *</label>
             <select id="v-country" required>
               <option value="">— เลือกประเทศ / Select —</option>
+             <option value="">— เลือกประเทศ / Select —</option>
               <option value="Thailand">Thailand</option>
               <option value="Afghanistan">Afghanistan</option>
               <option value="Albania">Albania</option>
@@ -360,6 +568,7 @@
               <option value="Yemen">Yemen</option>
               <option value="Zambia">Zambia</option>
               <option value="Zimbabwe">Zimbabwe</option>
+              <option value="Thailand">Thailand</option>
             </select>
           </div>
           <div>
@@ -467,16 +676,22 @@
           </div>
         </div>
 
+        <!-- Consent -->
         <div class="row">
           <div>
             <label class="title">ความยินยอม<span class="en">/ Consent</span> *</label>
-            <div class="consent-desc">
-              <strong>EN:</strong> By attending the WGP#1 Waterjet World Cup 2025, which includes live broadcasting and global media coverage, you grant the event organizers and their partners the right to photograph, film, and record your image and voice for use in promotions, advertising, live streams, and other media—without the need for further consent or compensation. Entering the event area constitutes full and unconditional consent. If you do not wish to appear in such media, please avoid camera zones or broadcast areas.<br><br>
-              <strong>TH:</strong> ในการเข้าชมการแข่งขัน WGP#1 Waterjet World Cup 2025 ซึ่งมีการถ่ายทอดสดและเผยแพร่สู่สาธารณะทั่วโลก ท่านยินยอมให้ผู้จัดงานและพันธมิตร สามารถบันทึกภาพนิ่ง วิดีโอ และเสียงของท่าน เพื่อใช้ในสื่อประชาสัมพันธ์ โฆษณา ถ่ายทอดสด และสื่ออื่น ๆ โดยไม่ต้องขออนุญาตหรือจ่ายค่าตอบแทนใด ๆ เพิ่มเติม การเข้าสู่พื้นที่จัดงาน ถือเป็นการให้ความยินยอมโดยสมบูรณ์ หากไม่ประสงค์ให้ถูกบันทึกภาพ โปรดหลีกเลี่ยงบริเวณกล้องหรือพื้นที่ถ่ายทอดสด
+            <div class="note">
+              โปรดอ่านรายละเอียดนโยบายข้อมูล และการใช้ภาพ/วิดีโอก่อนทำเครื่องหมายยินยอม
+              <button type="button" class="link-btn" id="open-consent-modal">
+                อ่านรายละเอียด / Read more
+              </button>
             </div>
             <label class="consent-check">
               <input type="checkbox" id="v-consent" required>
-              <span>ฉันได้อ่านและยินยอมตามเงื่อนไขข้างต้น • I have read and consent</span>
+              <span>
+                ฉันได้อ่านและยินยอมตามเงื่อนไขข้างต้น<br>
+                I have read and consent to the conditions above.
+              </span>
             </label>
           </div>
         </div>
@@ -493,8 +708,8 @@
   <section id="screen-thank" class="screen container hidden">
     <div class="card">
       <div class="thank">
-        <h2 style="margin:0 0 8px 0;">THANK YOU!</h2>
-        <p style="margin:0">
+        <h2>THANK YOU!</h2>
+        <p>
           Thank you for being part of this world-class competition — we hope you enjoy an unforgettable and thrilling experience!<br>
           ขอบคุณที่ร่วมเป็นส่วนหนึ่งของการแข่งขันระดับโลกครั้งนี้ — ขอให้คุณสนุกกับประสบการณ์สุดมันส์!
         </p>
@@ -510,7 +725,7 @@
   <!-- SCREEN 3: STAFF -->
   <section id="screen-staff" class="screen container hidden">
     <div class="card">
-      <div class="head"><h2 style="margin:0">ส่วนที่ 2 — เจ้าหน้าที่ (Staff)</h2></div>
+      <div class="head"><h2>ส่วนที่ 2 — เจ้าหน้าที่ (Staff)</h2></div>
       <form class="body" id="staff-form" autocomplete="off">
         <div class="row two">
           <div>
@@ -540,6 +755,7 @@
             </select>
           </div>
         </div>
+
         <div class="row two">
           <div>
             <label class="title">จำนวนตั๋วที่ซื้อ<span class="en">/ Quantity</span> *</label>
@@ -550,6 +766,7 @@
             <input id="s-amount" type="number" min="0" step="1" required>
           </div>
         </div>
+
         <div class="row">
           <div>
             <label class="title">ช่องทางการชำระ<span class="en">/ Payment Method</span> *</label>
@@ -594,6 +811,32 @@
       </div>
     </div>
   </section>
+
+  <!-- MODAL: Consent Details -->
+  <div id="consent-modal" class="modal hidden">
+    <div id="consent-modal-backdrop" class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button type="button" class="modal-close" id="close-consent-modal">&times;</button>
+      <h3>Consent Details</h3>
+
+      <h4>EN: Media (Photo & Video) & Personal Data</h4>
+      <p>
+        By attending the WGP#1 Waterjet World Cup 2025, which includes live broadcasting and global media coverage,
+        you grant the event organizers and their partners the right to photograph, film, and record your image and voice
+        for use in promotions, advertising, live streams, and other media—without the need for further consent or
+        compensation. Entering the event area constitutes full and unconditional consent. If you do not wish to appear
+        in such media, please avoid camera zones or broadcast areas.
+      </p>
+
+      <h4>TH: การเก็บข้อมูลส่วนบุคคล และการบันทึกภาพ/วิดีโอ</h4>
+      <p>
+        ในการเข้าชมการแข่งขัน WGP#1 Waterjet World Cup 2025 ซึ่งมีการถ่ายทอดสดและเผยแพร่สู่สาธารณะทั่วโลก
+        ท่านยินยอมให้ผู้จัดงานและพันธมิตร สามารถบันทึกภาพนิ่ง วิดีโอ และเสียงของท่าน เพื่อใช้ในสื่อประชาสัมพันธ์
+        โฆษณา ถ่ายทอดสด และสื่ออื่น ๆ โดยไม่ต้องขออนุญาตหรือจ่ายค่าตอบแทนใด ๆ เพิ่มเติม การเข้าสู่พื้นที่จัดงาน
+        ถือเป็นการให้ความยินยอมโดยสมบูรณ์ หากไม่ประสงค์ให้ถูกบันทึกภาพ โปรดหลีกเลี่ยงบริเวณกล้องหรือพื้นที่ถ่ายทอดสด
+      </p>
+    </div>
+  </div>
 
   <script>
     // แสดง / ซ่อนช่องจังหวัดถ้าเลือก Thailand
@@ -702,6 +945,23 @@
       document.getElementById('staff-form').reset();
       show('screen-visitor');
     });
+
+    // Modal: Consent details
+    (function(){
+      const modal   = document.getElementById('consent-modal');
+      const openBtn = document.getElementById('open-consent-modal');
+      const closeBtn= document.getElementById('close-consent-modal');
+      const backdrop= document.getElementById('consent-modal-backdrop');
+
+      if (!modal || !openBtn || !closeBtn || !backdrop) return;
+
+      function openModal(){ modal.classList.remove('hidden'); }
+      function closeModal(){ modal.classList.add('hidden'); }
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+    })();
   </script>
 </body>
 </html>
