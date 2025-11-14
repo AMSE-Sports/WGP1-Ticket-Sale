@@ -20,7 +20,7 @@
         .from('ticket_sales')
         .insert({
           submitted_at: submittedAt,
-          visitor_email: visitor.email,
+          visitor_email: null,
           visitor_first_name: visitor.firstName,
           visitor_last_name: visitor.lastName,
           visitor_gender: visitor.gender,
@@ -324,14 +324,6 @@
       <div class="head">
         <h2>ส่วนที่ 1 — ผู้ชม (Visitor)</h2>
       </div>
-
-      <form class="body" id="visitor-form">
-        <div class="row">
-          <div>
-            <label class="title">อีเมล<span class="en">/ Email</span> *</label>
-            <input id="v-email" type="email" required placeholder="name@example.com">
-          </div>
-        </div>
 
         <div class="row two">
           <div>
@@ -901,7 +893,6 @@
 
       var payload = {
         visitor: {
-          email: document.getElementById('v-email').value.trim(),
           firstName: document.getElementById('v-first').value.trim(),
           lastName: document.getElementById('v-last').value.trim(),
           gender: document.getElementById('v-gender').value,
