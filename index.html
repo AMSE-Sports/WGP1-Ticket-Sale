@@ -174,86 +174,69 @@
       border-color:#16a34a;
     }
 
-    /* ---------- PROGRESS BAR FOR VISITOR ---------- */
-    .progress-wrapper {
-      padding:10px 6px 14px;
-      margin-bottom:12px;
-      background:#fff;
-      border-bottom:1px solid var(--border);
-    }
+    /* ---------- PROGRESS BAR (COMPACT MODE) ---------- */
 
-    .progress-top {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      font-size:var(--font-note);
-      font-weight:600;
-      color:#374151;
-    }
+.progress-wrapper {
+  padding:6px 6px 10px;
+  margin-bottom:10px;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+}
 
-    .progress-title {
-      text-transform:uppercase;
-      letter-spacing:0.06em;
-      font-weight:800;
-      color:#6b7280;
-    }
+.progress-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:clamp(12px,1.4vw,14px);
+  padding:0 4px;
+}
 
-    .progress-current {
-      font-weight:700;
-      color:#111827;
-    }
+.progress-title {
+  font-size:clamp(12px,1.4vw,13px);
+}
 
-    .progress-track {
-      position:relative;
-      height:8px;
-      border-radius:999px;
-      background:#e5e7eb;
-      margin-top:8px;
-      overflow:hidden;
-    }
+.progress-current {
+  font-size:clamp(12px,1.4vw,13px);
+}
 
-    .progress-fill {
-      position:absolute;
-      inset:0;
-      width:0%;
-      background:var(--primary);
-      border-radius:999px;
-      transition:width .25s ease;
-    }
+.progress-track {
+  height:6px; /* ลดจาก 8px */
+  margin-top:6px;
+  border-radius:999px;
+}
 
-    .progress-steps {
-      display:flex;
-      justify-content:space-between;
-      margin-top:10px;
-      gap:6px;
-    }
+.progress-fill {
+  border-radius:999px;
+}
 
-    .progress-step {
-      flex:1 1 0;
-      text-align:center;
-      font-size:var(--font-note);
-      color:#6b7280;
-    }
+/* row ปุ่ม step */
+.progress-steps {
+  display:flex;
+  justify-content:space-between;
+  margin-top:6px;
+  gap:4px;
+}
 
-    .progress-step .dot {
-      width:22px;
-      height:22px;
-      margin:0 auto 4px;
-      border-radius:999px;
-      border:2px solid #d1d5db;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      background:#fff;
-      transition:all .2s ease;
-    }
+/* step box */
+.progress-step {
+  flex:1;
+  text-align:center;
+}
 
-    .progress-step .caption {
-      line-height:1.2;
-      font-weight:600;
-    }
+/* DOT เล็กลง */
+.progress-step .dot {
+  width:18px;  /* เดิม 22px */
+  height:18px;
+  border-width:2px;
+  font-size:clamp(10px,1.3vw,12px);
+  margin-bottom:2px;
+}
+
+/* caption เล็กลง */
+.progress-step .caption {
+  font-size:clamp(10px,1.3vw,12px);
+  line-height:1.1;
+}
 
     /* step ปัจจุบัน */
     .progress-step.active .dot {
@@ -1204,51 +1187,55 @@
       }
 
       function refreshSteps(){
-        let firstIncomplete = -1;
+  let firstIncomplete = -1;
 
-        stepEls.forEach((step, idx) => {
-          const complete = isStepComplete(step);
-          step.classList.toggle('complete', complete);
-          step.classList.remove('active', 'next');
+  stepEls.forEach((step, idx) => {
+    const complete = isStepComplete(step);
+    step.classList.toggle('complete', complete);
+    step.classList.remove('active', 'next');
 
-          if (!complete && firstIncomplete === -1) {
-            firstIncomplete = idx;
-          }
-        });
+    if (!complete && firstIncomplete === -1) {
+      firstIncomplete = idx;
+    }
+  });
 
-        let currentStepIndex;
-        if (firstIncomplete === -1) {
-          currentStepIndex = totalSteps - 1; // all complete → focus last
-        } else {
-          currentStepIndex = firstIncomplete;
-        }
-        const currentStepNumber = currentStepIndex + 1;
+  // กรณีทุก step complete → แสดง step สุดท้ายเป็น active
+  let currentStepIndex;
+  if (firstIncomplete === -1) {
+    currentStepIndex = totalSteps - 1;
+  } else {
+    currentStepIndex = firstIncomplete;
+  }
 
-        // mark active / next on boxes
-        if (firstIncomplete === -1) {
-          stepEls[totalSteps - 1].classList.add('active');
-        } else {
-          stepEls[firstIncomplete].classList.add('active');
-          if (stepEls[firstIncomplete + 1]) {
-            stepEls[firstIncomplete + 1].classList.add('next');
-          }
-        }
+  const currentStepNumber = currentStepIndex + 1;
 
-        // update progress bar
-        const percent = (currentStepNumber / totalSteps) * 100;
-        if (fillEl) fillEl.style.width = percent + '%';
-        if (labelEl) labelEl.textContent = `Step ${currentStepNumber} of ${totalSteps}`;
+  // highlight กล่อง step
+  stepEls.forEach((s, i) => {
+    s.classList.remove('active', 'next');
+    if (i === currentStepIndex) {
+      s.classList.add('active');
+    } else if (i === currentStepIndex + 1) {
+      s.classList.add('next');
+    }
+  });
 
-        pSteps.forEach(ps => {
-          const sNum = Number(ps.getAttribute('data-step'));
-          ps.classList.remove('active', 'complete');
-          if (sNum < currentStepNumber) {
-            ps.classList.add('complete');
-          } else if (sNum === currentStepNumber) {
-            ps.classList.add('active');
-          }
-        });
-      }
+  // update progress bar
+  const percent = (currentStepNumber / totalSteps) * 100;
+  fillEl.style.width = percent + "%";
+  labelEl.textContent = `Step ${currentStepNumber} of ${totalSteps}`;
+
+  // update progress steps (dot)
+  pSteps.forEach(ps => {
+    const sNum = Number(ps.getAttribute('data-step'));
+    ps.classList.remove('active', 'complete');
+
+    if (sNum < currentStepNumber) {
+      ps.classList.add('complete');
+    } else if (sNum === currentStepNumber) {
+      ps.classList.add('active');
+    }
+  });
+}
 
       // bind events
       const fields = document.querySelectorAll('#visitor-form .form-step input, #visitor-form .form-step select');
