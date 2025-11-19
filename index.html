@@ -163,37 +163,42 @@
     .btn.dark { background:#111; color:#fff; }
     .btn.wide { width:100%; }
 
-    .thankfull {
-  min-height:70vh;
+ .thankfull {
+  min-height:75vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
   color:#fff;
-
-  /* พื้นหลังส้มแบบเนียน */
-  background:linear-gradient(135deg, #f37021 0%, #ff8c4a 100%);
-  
-  padding:80px 20px 100px;
-  margin:0;
-  width:100%;
+  background:#e97435; /* สีส้มเรียบ ดูพรีเมียมกว่า gradient */
+  padding:100px 20px;
 }
 
+/* หัวข้อหลัก */
 .thankfull h2 {
-  font-size:clamp(40px, 6vw, 68px);
+  font-size:clamp(42px, 6vw, 64px);
   font-weight:900;
-  margin-bottom:20px;
-  text-shadow:0 3px 15px rgba(0,0,0,0.35);
+  margin-bottom:28px;
+  text-shadow:0 3px 12px rgba(0,0,0,0.3);
 }
 
-.thankfull p {
-  max-width:900px;
-  font-size:clamp(22px, 3vw, 30px);
+/* EN: ข้อความรอง */
+.thankfull .sub-en {
+  font-size:clamp(20px, 3vw, 28px);
   font-weight:600;
-  line-height:1.6;
-  margin-bottom:40px;
-  text-shadow:0 2px 10px rgba(0,0,0,0.25);
+  margin-bottom:30px;
+  opacity:0.95;
+  text-shadow:0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* TH: ข้อความธิบาย */
+.thankfull .sub-th {
+  font-size:clamp(18px, 2.5vw, 26px);
+  font-weight:500;
+  line-height:1.7;
+  opacity:0.92;
+  text-shadow:0 2px 8px rgba(0,0,0,0.25);
 }
 
     .complete {
