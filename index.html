@@ -115,6 +115,166 @@
     @media (min-width:760px) {
       .row.two { grid-template-columns:1fr 1fr; }
     }
+    /* ---------- STEP UI ---------- */
+    .form-step {
+      position:relative;
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:18px 16px 12px;
+      margin-bottom:18px;
+      background:#fff;
+      transition:border-color .2s, box-shadow .2s, background .2s;
+    }
+
+    .form-step .step-badge {
+      position:absolute;
+      top:-12px;
+      left:16px;
+      padding:4px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid #ddd;
+      font-size:var(--font-note);
+      font-weight:800;
+      color:#666;
+    }
+
+    /* Step ปัจจุบัน */
+    .form-step.active {
+      border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(243,112,33,.18);
+      background:#fffdf8;
+    }
+    .form-step.active .step-badge {
+      background:var(--primary);
+      color:#fff;
+      border-color:var(--primary);
+    }
+
+    /* Step ถัดไป */
+    .form-step.next {
+      border-style:dashed;
+      border-color:#fdba74;
+      background:#fffaf3;
+    }
+    .form-step.next .step-badge {
+      background:#fff7ed;
+      border-color:#fdba74;
+      color:#b45309;
+    }
+
+    /* Step ที่กรอกครบแล้ว */
+    .form-step.complete {
+      border-color:#16a34a;
+      background:#f0fdf4;
+    }
+    .form-step.complete .step-badge {
+      background:#16a34a;
+      color:#fff;
+      border-color:#16a34a;
+    }
+
+    /* ---------- PROGRESS BAR FOR VISITOR ---------- */
+    .progress-wrapper {
+      padding:10px 6px 14px;
+      margin-bottom:12px;
+      background:#fff;
+      border-bottom:1px solid var(--border);
+    }
+
+    .progress-top {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      font-size:var(--font-note);
+      font-weight:600;
+      color:#374151;
+    }
+
+    .progress-title {
+      text-transform:uppercase;
+      letter-spacing:0.06em;
+      font-weight:800;
+      color:#6b7280;
+    }
+
+    .progress-current {
+      font-weight:700;
+      color:#111827;
+    }
+
+    .progress-track {
+      position:relative;
+      height:8px;
+      border-radius:999px;
+      background:#e5e7eb;
+      margin-top:8px;
+      overflow:hidden;
+    }
+
+    .progress-fill {
+      position:absolute;
+      inset:0;
+      width:0%;
+      background:var(--primary);
+      border-radius:999px;
+      transition:width .25s ease;
+    }
+
+    .progress-steps {
+      display:flex;
+      justify-content:space-between;
+      margin-top:10px;
+      gap:6px;
+    }
+
+    .progress-step {
+      flex:1 1 0;
+      text-align:center;
+      font-size:var(--font-note);
+      color:#6b7280;
+    }
+
+    .progress-step .dot {
+      width:22px;
+      height:22px;
+      margin:0 auto 4px;
+      border-radius:999px;
+      border:2px solid #d1d5db;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      background:#fff;
+      transition:all .2s ease;
+    }
+
+    .progress-step .caption {
+      line-height:1.2;
+      font-weight:600;
+    }
+
+    /* step ปัจจุบัน */
+    .progress-step.active .dot {
+      border-color:var(--primary);
+      background:var(--primary);
+      color:#fff;
+      box-shadow:0 0 0 3px rgba(243,112,33,.25);
+    }
+    .progress-step.active .caption {
+      color:#111827;
+    }
+
+    /* step ที่ทำเสร็จ */
+    .progress-step.complete .dot {
+      border-color:#16a34a;
+      background:#16a34a;
+      color:#fff;
+    }
+    .progress-step.complete .caption {
+      color:#065f46;
+    }
 
     label.title {
       font-weight:800;
@@ -345,50 +505,95 @@
       <div class="head">
         <h2>ส่วนที่ 1 — ผู้ชม (Visitor)</h2>
       </div>
-
       <form class="body" id="visitor-form">
 
-        <div class="row two">
-          <div>
-            <label class="title">ชื่อจริง<span class="en">/ First Name</span> *</label>
-            <input id="v-first" required>
+        <!-- PROGRESS BAR -->
+        <div class="progress-wrapper" id="visitor-progress">
+          <div class="progress-top">
+            <span class="progress-title">Visitor Registration</span>
+            <span class="progress-current" id="visitor-progress-label">Step 1 of 4</span>
           </div>
-          <div>
-            <label class="title">นามสกุล<span class="en">/ Last Name</span> *</label>
-            <input id="v-last" required>
+
+          <div class="progress-track">
+            <div class="progress-fill" id="visitor-progress-fill"></div>
+          </div>
+
+          <div class="progress-steps">
+            <div class="progress-step" data-step="1">
+              <div class="dot">1</div>
+              <div class="caption">Name</div>
+            </div>
+            <div class="progress-step" data-step="2">
+              <div class="dot">2</div>
+              <div class="caption">Gender &amp; Age</div>
+            </div>
+            <div class="progress-step" data-step="3">
+              <div class="dot">3</div>
+              <div class="caption">Location</div>
+            </div>
+            <div class="progress-step" data-step="4">
+              <div class="dot">4</div>
+              <div class="caption">Source</div>
+            </div>
           </div>
         </div>
 
-      <div class="note" style="margin-top:-6px; margin-bottom:16px;">
-  กรุณากรอกชื่อ–นามสกุลตามบัตรประชาชนหรือหนังสือเดินทาง • Please use your legal first and last name.
-</div>
-        <div class="row two">
-          <div>
-            <label class="title">เพศ<span class="en">/ Gender</span> *</label>
-            <select id="v-gender" required>
-              <option value="">— เลือกเพศ / Select —</option>
-              <option value="male">ชาย / Male</option>
-              <option value="female">หญิง / Female</option>
-              <option value="unspecified">ไม่ระบุ / Prefer not to say</option>
-            </select>
+        <!-- STEP 1 : Name (1–2) -->
+        <div class="form-step" data-step="1">
+          <div class="step-badge">STEP 1</div>
+
+          <div class="row two">
+            <div>
+              <label class="title">1. ชื่อจริง<span class="en"> / First Name</span> *</label>
+              <input id="v-first" required>
+            </div>
+            <div>
+              <label class="title">2. นามสกุล<span class="en"> / Last Name</span> *</label>
+              <input id="v-last" required>
+            </div>
           </div>
-          <div>
-            <label class="title">อายุ<span class="en">/ Age</span> *</label>
-            <select id="v-age" required>
-              <option value="">— เลือกช่วงอายุ / Select —</option>
-              <option>ต่ำกว่า 18 ปี / Under 18</option>
-              <option>18-25 ปี / 18–25</option>
-              <option>26-40 ปี / 26–40</option>
-              <option>41-60 ปี / 41–60</option>
-              <option>60 ปีขึ้นไป / 60+</option>
-            </select>
+
+          <div class="note" style="margin-top:-6px; margin-bottom:0;">
+            กรุณากรอกชื่อ–นามสกุลตามบัตรประชาชนหรือหนังสือเดินทาง • Please use your legal first and last name.
           </div>
         </div>
 
-        <div class="row two">
-          <div>
-            <label class="title">ประเทศที่อาศัย<span class="en">/ Country of Residence</span> *</label>
-            <select id="v-country" required>
+        <!-- STEP 2 : Gender / Age (3–4) -->
+        <div class="form-step" data-step="2">
+          <div class="step-badge">STEP 2</div>
+
+          <div class="row two">
+            <div>
+              <label class="title">3. เพศ<span class="en"> / Gender</span> *</label>
+              <select id="v-gender" required>
+                <option value="">— เลือกเพศ / Select —</option>
+                <option value="male">ชาย / Male</option>
+                <option value="female">หญิง / Female</option>
+                <option value="unspecified">ไม่ระบุ / Prefer not to say</option>
+              </select>
+            </div>
+            <div>
+              <label class="title">4. อายุ<span class="en"> / Age</span> *</label>
+              <select id="v-age" required>
+                <option value="">— เลือกช่วงอายุ / Select —</option>
+                <option>ต่ำกว่า 18 ปี / Under 18</option>
+                <option>18-25 ปี / 18–25</option>
+                <option>26-40 ปี / 26–40</option>
+                <option>41-60 ปี / 41–60</option>
+                <option>60 ปีขึ้นไป / 60+</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 : Country / Province / City (5, 5.1, 6) -->
+        <div class="form-step" data-step="3">
+          <div class="step-badge">STEP 3</div>
+
+          <div class="row two">
+            <div>
+              <label class="title">5. ประเทศที่อาศัย<span class="en"> / Country of Residence</span> *</label>
+              <select id="v-country" required>
               <option value="">— เลือกประเทศ / Select —</option>
               <option value="Thailand">Thailand</option>
               <option value="Afghanistan">Afghanistan</option>
@@ -586,19 +791,21 @@
               <option value="Zambia">Zambia</option>
               <option value="Zimbabwe">Zimbabwe</option>
               <option value="Thailand">Thailand</option>
-            </select>
+              </select>
+            </div>
+            <div>
+              <label class="title">6. เมืองที่อาศัย<span class="en"> / City</span> *</label>
+              <input id="v-city" required pattern="[\u0E00-\u0E7F a-zA-Z-]+" placeholder="เช่น Pattaya / กรุงเทพฯ">
+              <div class="note">
+                รองรับอักษรไทย/อังกฤษและช่องว่างเท่านั้น • Thai/English letters & spaces only
+              </div>
+            </div>
           </div>
-          <div>
-            <label class="title">เมืองที่อาศัย<span class="en">/ City</span> *</label>
-            <input id="v-city" required pattern="[\u0E00-\u0E7F a-zA-Z-]+" placeholder="เช่น Pattaya / กรุงเทพฯ">
-            <div class="note">รองรับอักษรไทย/อังกฤษและช่องว่างเท่านั้น • Thai/English letters & spaces only</div>
-          </div>
-        </div>
 
-        <div class="row" id="thai-province-row" style="display:none">
-          <div>
-            <label class="title">จังหวัดในประเทศไทย<span class="en">/ Thai Province (if in Thailand)</span> *</label>
-            <select id="v-province">
+          <div class="row" id="thai-province-row" style="display:none">
+            <div>
+              <label class="title">5.1 จังหวัดในประเทศไทย<span class="en"> / Thai Province (if in Thailand)</span> *</label>
+              <select id="v-province">
               <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
               <option value="กระบี่">กระบี่</option>
               <option value="กาญจนบุรี">กาญจนบุรี</option>
@@ -675,21 +882,27 @@
               <option value="อุตรดิตถ์">อุตรดิตถ์</option>
               <option value="อุทัยธานี">อุทัยธานี</option>
               <option value="อุบลราชธานี">อุบลราชธานี</option>
-            </select>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="row">
-          <div>
-            <label class="title">คุณทราบข่าวจากสื่อใด<span class="en">/ How did you hear about us?</span> *</label>
-            <select id="v-source" required>
-              <option value="">— เลือกช่องทาง / Select —</option>
-              <option value="pattaya-promotions">From Promotions in Pattaya จากการประชาสัมพันธ์ในเมือง</option>
-              <option value="online-media">From online media จากช่องทางออนไลน์</option>
-              <option value="news-tv">From news and TV จาก หนังสือพิมพ์ หรือโทรทัศน์</option>
-              <option value="world-series-2025">From the World Series 2025 จากงาน เวิล์ดซีรีส์ 2025</option>
-              <option value="friend">From a Friend or Acquaintance จากเพื่อนหรือคนรู้จัก</option>
-            </select>
+        <!-- STEP 4 : Source (7) -->
+        <div class="form-step" data-step="4">
+          <div class="step-badge">STEP 4</div>
+
+          <div class="row">
+            <div>
+              <label class="title">7. คุณทราบข่าวจากสื่อใด<span class="en"> / How did you hear about us?</span> *</label>
+              <select id="v-source" required>
+                <option value="">— เลือกช่องทาง / Select —</option>
+                <option value="pattaya-promotions">From Promotions in Pattaya จากการประชาสัมพันธ์ในเมือง</option>
+                <option value="online-media">From online media จากช่องทางออนไลน์</option>
+                <option value="news-tv">From news and TV จาก หนังสือพิมพ์ หรือโทรทัศน์</option>
+                <option value="world-series-2025">From the World Series 2025 จากงาน เวิล์ดซีรีส์ 2025</option>
+                <option value="friend">From a Friend or Acquaintance จากเพื่อนหรือคนรู้จัก</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -963,7 +1176,102 @@
       document.getElementById('staff-form').reset();
       show('screen-visitor');
     });
+    // ---------- STEP HIGHLIGHT + PROGRESS BAR FOR VISITOR FORM ----------
+    (function(){
+      const stepEls = Array.from(document.querySelectorAll('#visitor-form .form-step'));
+      if (!stepEls.length) return;
 
+      const fillEl   = document.getElementById('visitor-progress-fill');
+      const labelEl  = document.getElementById('visitor-progress-label');
+      const pSteps   = Array.from(document.querySelectorAll('#visitor-progress .progress-step'));
+      const totalSteps = stepEls.length; // 4
+
+      function isStepComplete(step){
+        const fields = step.querySelectorAll('input, select');
+        let hasRequired = false;
+        let allRequiredFilled = true;
+
+        fields.forEach(f => {
+          if (f.hasAttribute('required')) {
+            hasRequired = true;
+            if (!f.value) {
+              allRequiredFilled = false;
+            }
+          }
+        });
+
+        return hasRequired && allRequiredFilled;
+      }
+
+      function refreshSteps(){
+        let firstIncomplete = -1;
+
+        stepEls.forEach((step, idx) => {
+          const complete = isStepComplete(step);
+          step.classList.toggle('complete', complete);
+          step.classList.remove('active', 'next');
+
+          if (!complete && firstIncomplete === -1) {
+            firstIncomplete = idx;
+          }
+        });
+
+        let currentStepIndex;
+        if (firstIncomplete === -1) {
+          currentStepIndex = totalSteps - 1; // all complete → focus last
+        } else {
+          currentStepIndex = firstIncomplete;
+        }
+        const currentStepNumber = currentStepIndex + 1;
+
+        // mark active / next on boxes
+        if (firstIncomplete === -1) {
+          stepEls[totalSteps - 1].classList.add('active');
+        } else {
+          stepEls[firstIncomplete].classList.add('active');
+          if (stepEls[firstIncomplete + 1]) {
+            stepEls[firstIncomplete + 1].classList.add('next');
+          }
+        }
+
+        // update progress bar
+        const percent = (currentStepNumber / totalSteps) * 100;
+        if (fillEl) fillEl.style.width = percent + '%';
+        if (labelEl) labelEl.textContent = `Step ${currentStepNumber} of ${totalSteps}`;
+
+        pSteps.forEach(ps => {
+          const sNum = Number(ps.getAttribute('data-step'));
+          ps.classList.remove('active', 'complete');
+          if (sNum < currentStepNumber) {
+            ps.classList.add('complete');
+          } else if (sNum === currentStepNumber) {
+            ps.classList.add('active');
+          }
+        });
+      }
+
+      // bind events
+      const fields = document.querySelectorAll('#visitor-form .form-step input, #visitor-form .form-step select');
+      fields.forEach(f => {
+        f.addEventListener('focus', () => {
+          const step = f.closest('.form-step');
+          if (!step) return;
+          stepEls.forEach(s => {
+            if (!s.classList.contains('complete')) {
+              s.classList.remove('active','next');
+            }
+          });
+          step.classList.add('active');
+        });
+
+        ['change', 'input', 'blur'].forEach(ev => {
+          f.addEventListener(ev, refreshSteps);
+        });
+      });
+
+      // run once at start
+      refreshSteps();
+    })();
    
   </script>
 </body>
