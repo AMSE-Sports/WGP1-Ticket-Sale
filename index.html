@@ -115,41 +115,59 @@
     @media (min-width:760px) {
       .row.two { grid-template-columns:1fr 1fr; }
     }
-   /* STEP ปกติ */
+  /* กล่องของแต่ละ STEP */
 .form-step {
-  position:relative;
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:18px 16px 12px;
-  margin-bottom:18px;
-  background:#fff;
-  transition:border-color .2s, box-shadow .2s, background .2s;
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  margin-bottom: 18px;
+  background: #fff;
+  padding: 58px 16px 16px; /* เผื่อพื้นที่ด้านบนสำหรับแถบ STEP */
+  transition: border-color .2s, box-shadow .2s, background .2s;
 }
 
-/* STEP ที่กรอกอยู่ */
+/* แถบ STEP ด้านบน — ใช้ layout แบบเดียวกันทุกสถานะ */
+.form-step .step-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;                 /* ให้เต็มกว้างกล่อง */
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* ตัวหนังสืออยู่กึ่งกลางเสมอ */
+  border-radius: 16px 16px 0 0;
+  font-size: var(--font-note);
+  font-weight: 800;
+  background: #f3f4f6;      /* สีพื้น default */
+  color: #111;
+  border-bottom: 1px solid var(--border);
+}
+
+/* STEP กำลังกรอกอยู่ (active) */
 .form-step.active {
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(243,112,33,.18);
-  background:#fffdf8;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(243,112,33,.18);
+  background: #fffdf8;
 }
 .form-step.active .step-badge {
-  background:var(--primary);
-  color:#fff;
-  border-color:var(--primary);
+  background: var(--primary);
+  color: #fff;
+  border-bottom-color: var(--primary);
 }
 
-/* STEP ที่กรอกครบแล้ว */
+/* STEP กรอกครบแล้ว (complete) */
 .form-step.complete {
-  border-color:#16a34a;
-  background:#dcfce7;            /* เขียวอ่อน */
+  border-color: #16a34a;
+  background: #dcfce7;
 }
 .form-step.complete .step-badge {
-  background:#16a34a;
-  border-color:#16a34a;
-  color:#fff;
+  background: #16a34a;
+  color: #fff;
+  border-bottom-color: #16a34a;
 }
 
-/* ไม่ให้ตัวอักษรจาง/หายเมื่อ step เป็น complete */
+/* ไม่ให้ตัวอักษรใน step ที่ complete จาง/หาย */
 .form-step.complete label.title,
 .form-step.complete .note,
 .form-step.complete input,
@@ -161,8 +179,7 @@
   color:#9ca3af;
 }
 
-    
-    label.title {
+        label.title {
       font-weight:800;
       font-size:var(--font-label);
       margin-bottom:6px;
