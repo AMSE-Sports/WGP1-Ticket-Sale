@@ -926,41 +926,6 @@
   </section>
 
   <script>
-    // แสดง / ซ่อนช่องจังหวัดถ้าเลือก Thailand
-    (function(){
-      var c = document.getElementById('v-country');
-      var pr = document.getElementById('v-province');
-      var row = document.getElementById('thai-province-row');
-      function toggle(){
-        var isTH = (c.value === 'Thailand' || c.value === 'ไทย');
-        row.style.display = isTH ? 'grid' : 'none';
-        pr.required = !!isTH;
-        if (!isTH) pr.value = '';
-      }
-      c.addEventListener('change', toggle);
-      toggle();
-    })();
-
-    function show(id){
-      ['screen-visitor','screen-thank','screen-staff','screen-complete']
-        .forEach(i => document.getElementById(i).classList.add('hidden'));
-      document.getElementById(id).classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Visitor -> Thank
-    document.getElementById('visitor-form').addEventListener('submit', function(e){
-      e.preventDefault();
-      show('screen-thank');
-    });
-
-    // Thank -> Staff
-    document.getElementById('to-staff').addEventListener('click', function(){
-      show('screen-staff');
-    });
-
-    // Auto price calculation
-    <script>
   // แสดง / ซ่อนช่องจังหวัดถ้าเลือก Thailand
   (function(){
     var c = document.getElementById('v-country');
@@ -1126,7 +1091,7 @@
 
     refreshSteps();
   })();
-</script>
+
 
    
   </script>
