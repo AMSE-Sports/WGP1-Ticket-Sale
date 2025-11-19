@@ -115,53 +115,39 @@
     @media (min-width:760px) {
       .row.two { grid-template-columns:1fr 1fr; }
     }
-    /* ---------- STEP UI ---------- */
-    .form-step {
-      position:relative;
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:18px 16px 12px;
-      margin-bottom:18px;
-      background:#fff;
-      transition:border-color .2s, box-shadow .2s, background .2s;
-    }
+   /* STEP ปกติ */
+.form-step {
+  position:relative;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px 16px 12px;
+  margin-bottom:18px;
+  background:#fff;
+  transition:border-color .2s, box-shadow .2s, background .2s;
+}
 
-    .form-step .step-badge {
-      position:absolute;
-      top:-12px;
-      left:16px;
-      padding:4px 12px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid #ddd;
-      font-size:var(--font-note);
-      font-weight:800;
-      color:#666;
-    }
+/* STEP ที่กรอกอยู่ */
+.form-step.active {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(243,112,33,.18);
+  background:#fffdf8;
+}
+.form-step.active .step-badge {
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
+}
 
-    /* Step ปัจจุบัน */
-    .form-step.active {
-      border-color:var(--primary);
-      box-shadow:0 0 0 3px rgba(243,112,33,.18);
-      background:#fffdf8;
-    }
-    .form-step.active .step-badge {
-      background:var(--primary);
-      color:#fff;
-      border-color:var(--primary);
-    }
-
-    /* Step ถัดไป */
-    .form-step.next {
-      border-style:dashed;
-      border-color:#fdba74;
-      background:#fffaf3;
-    }
-    .form-step.next .step-badge {
-      background:#fff7ed;
-      border-color:#fdba74;
-      color:#b45309;
-    }
+/* STEP ที่กรอกครบแล้ว */
+.form-step.complete {
+  border-color:#16a34a;
+  background:#dcfce7;            /* เขียวอ่อน */
+}
+.form-step.complete .step-badge {
+  background:#16a34a;
+  border-color:#16a34a;
+  color:#fff;
+}
 
 /* ไม่ให้ตัวอักษรจาง/หายเมื่อ step เป็น complete */
 .form-step.complete label.title,
@@ -170,116 +156,12 @@
 .form-step.complete select {
   color:#111 !important;
 }
-
-/* ให้ placeholder ยังอ่านออกได้ด้วย */
 .form-step.complete input::placeholder,
 .form-step.complete select::placeholder {
   color:#9ca3af;
 }
 
-   /* ---------- PROGRESS BAR (COMPACT) ---------- */
-
-.progress-wrapper {
-  padding:4px 8px 8px;
-  margin-bottom:10px;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-}
-
-/* ข้อความหัว–ท้ายด้านบน */
-.progress-top {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:clamp(12px,1.4vw,13px);
-  padding:0 2px;
-}
-
-.progress-title {
-  text-transform:uppercase;
-  letter-spacing:0.06em;
-  font-weight:800;
-  color:#6b7280;
-}
-
-.progress-current {
-  font-weight:700;
-  color:#111827;
-}
-
-/* เส้นวิ่ง */
-.progress-track {
-  position:relative;
-  height:5px;                /* เตี้ยลง */
-  border-radius:999px;
-  background:#e5e7eb;
-  margin-top:6px;
-  overflow:hidden;
-}
-
-.progress-fill {
-  position:absolute;
-  inset:0;
-  width:0%;
-  background:var(--primary);
-  border-radius:999px;
-  transition:width .25s ease;
-}
-
-/* กล่อง step ด้านบน */
-.progress-steps {
-  display:flex;
-  justify-content:space-between;
-  margin-top:6px;
-  gap:4px;
-}
-
-/* ทำให้กล่อง step เตี้ยลง */
-.progress-step {
-  flex:1;
-  text-align:center;
-  padding:4px 0 6px;        /* << จุดสำคัญ: padding น้อยลงมาก */
-}
-
-/* ถ้ามีพื้นหลัง gradient เขียวของคุณอยู่แล้วจะยังแสดง แต่เตี้ยลง */
-.progress-step .dot {
-  width:18px;
-  height:18px;
-  margin:0 auto 2px;
-  border-radius:999px;
-  border:2px solid #d1d5db;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  font-size:clamp(10px,1.3vw,12px);
-  background:#fff;
-  transition:all .2s ease;
-}
-
-.progress-step .caption {
-  font-size:clamp(10px,1.3vw,12px);
-  line-height:1.1;
-  font-weight:600;
-}
-
-/* สีเมื่อ active / complete ยังใช้ของเดิมได้ */
-.progress-step.active .dot {
-  border-color:var(--primary);
-  background:var(--primary);
-  color:#fff;
-  box-shadow:0 0 0 3px rgba(243,112,33,.25);
-}
-.progress-step.complete .dot {
-  border-color:#16a34a;
-  background:#16a34a;
-  color:#fff;
-}
-
-    .progress-step.complete .caption {
-      color:#065f46;
-    }
-
+    
     label.title {
       font-weight:800;
       font-size:var(--font-label);
@@ -510,37 +392,6 @@
         <h2>ส่วนที่ 1 — ผู้ชม (Visitor)</h2>
       </div>
       <form class="body" id="visitor-form">
-
-        <!-- PROGRESS BAR -->
-        <div class="progress-wrapper" id="visitor-progress">
-          <div class="progress-top">
-            <span class="progress-title">Visitor Registration</span>
-            <span class="progress-current" id="visitor-progress-label">Step 1 of 4</span>
-          </div>
-
-          <div class="progress-track">
-            <div class="progress-fill" id="visitor-progress-fill"></div>
-          </div>
-
-          <div class="progress-steps">
-            <div class="progress-step" data-step="1">
-              <div class="dot">1</div>
-              <div class="caption">Name</div>
-            </div>
-            <div class="progress-step" data-step="2">
-              <div class="dot">2</div>
-              <div class="caption">Gender &amp; Age</div>
-            </div>
-            <div class="progress-step" data-step="3">
-              <div class="dot">3</div>
-              <div class="caption">Location</div>
-            </div>
-            <div class="progress-step" data-step="4">
-              <div class="dot">4</div>
-              <div class="caption">Source</div>
-            </div>
-          </div>
-        </div>
 
         <!-- STEP 1 : Name (1–2) -->
         <div class="form-step" data-step="1">
@@ -1109,191 +960,174 @@
     });
 
     // Auto price calculation
-    (function(){
-      var sel = document.getElementById('s-ticket');
-      var qty = document.getElementById('s-qty');
-      var amt = document.getElementById('s-amount');
-      var totalEl = document.getElementById('auto-total');
-      function recalc(){
-        var price = Number((sel.options[sel.selectedIndex] || {}).getAttribute('data-price') || 0);
-        var q = Math.max(0, Number(qty.value || 0));
-        var total = price * q;
-        totalEl.textContent = total;
-        if (!document.activeElement || document.activeElement.id !== 's-amount') {
-          amt.value = total;
+    <script>
+  // แสดง / ซ่อนช่องจังหวัดถ้าเลือก Thailand
+  (function(){
+    var c = document.getElementById('v-country');
+    var pr = document.getElementById('v-province');
+    var row = document.getElementById('thai-province-row');
+    function toggle(){
+      var isTH = (c.value === 'Thailand' || c.value === 'ไทย');
+      row.style.display = isTH ? 'grid' : 'none';
+      pr.required = !!isTH;
+      if (!isTH) pr.value = '';
+    }
+    c.addEventListener('change', toggle);
+    toggle();
+  })();
+
+  function show(id){
+    ['screen-visitor','screen-thank','screen-staff','screen-complete']
+      .forEach(i => document.getElementById(i).classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Visitor -> Thank
+  document.getElementById('visitor-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    show('screen-thank');
+  });
+
+  // Thank -> Staff
+  document.getElementById('to-staff').addEventListener('click', function(){
+    show('screen-staff');
+  });
+
+  // Auto price calculation
+  (function(){
+    var sel = document.getElementById('s-ticket');
+    var qty = document.getElementById('s-qty');
+    var amt = document.getElementById('s-amount');
+    var totalEl = document.getElementById('auto-total');
+    function recalc(){
+      var price = Number((sel.options[sel.selectedIndex] || {}).getAttribute('data-price') || 0);
+      var q = Math.max(0, Number(qty.value || 0));
+      var total = price * q;
+      totalEl.textContent = total;
+      if (!document.activeElement || document.activeElement.id !== 's-amount') {
+        amt.value = total;
+      }
+    }
+    sel.addEventListener('change', recalc);
+    qty.addEventListener('input', recalc);
+    amt.addEventListener('input', function(){
+      totalEl.textContent = amt.value || 0;
+    });
+    recalc();
+  })();
+
+  // Staff submit -> Supabase -> Complete
+  document.getElementById('staff-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    var payload = {
+      visitor: {
+        firstName: document.getElementById('v-first').value.trim(),
+        lastName: document.getElementById('v-last').value.trim(),
+        gender: document.getElementById('v-gender').value,
+        ageRange: document.getElementById('v-age').value,
+        country: document.getElementById('v-country').value,
+        city: document.getElementById('v-city').value.trim(),
+        thaiProvince: document.getElementById('v-province').value || '',
+        source: document.getElementById('v-source').value,
+        consent: document.getElementById('v-consent').checked
+      },
+      staff: {
+        staffName: document.getElementById('s-staff').value,
+        ticketType: document.getElementById('s-ticket').value,
+        ticketQty: document.getElementById('s-qty').value,
+        amountPaid: document.getElementById('s-amount').value,
+        payMethod: (document.querySelector('input[name=pay]:checked') || {}).value || ''
+      },
+      submittedAt: new Date().toISOString()
+    };
+
+    var btn = document.getElementById('finalize');
+    var old = btn.textContent;
+    btn.textContent = 'กำลังส่ง... / Submitting...';
+    btn.disabled = true;
+
+    try {
+      await submitToSupabase(payload);
+      show('screen-complete');
+    } catch (err) {
+      console.error('[Submit Error]', err);
+      alert('บันทึกลงระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
+    } finally {
+      btn.textContent = old;
+      btn.disabled = false;
+    }
+  });
+
+  // Complete -> Back to start
+  document.getElementById('back-to-start').addEventListener('click', function(){
+    document.getElementById('visitor-form').reset();
+    document.getElementById('staff-form').reset();
+    show('screen-visitor');
+  });
+
+  // ----- STEP HIGHLIGHT: active + complete -----
+  (function(){
+    const stepEls = Array.from(document.querySelectorAll('.form-step'));
+    if (!stepEls.length) return;
+
+    function isStepComplete(stepEl){
+      const requiredFields = stepEl.querySelectorAll('input[required], select[required]');
+      for (const f of requiredFields) {
+        if (f.type === 'checkbox' || f.type === 'radio') {
+          const checked = stepEl.querySelectorAll(`input[name="${f.name}"]:checked`);
+          if (!checked.length) return false;
+        } else {
+          if (!f.value || !String(f.value).trim()) return false;
         }
       }
-      sel.addEventListener('change', recalc);
-      qty.addEventListener('input', recalc);
-      amt.addEventListener('input', function(){
-        totalEl.textContent = amt.value || 0;
+      return true;
+    }
+
+    function refreshSteps(){
+      let firstIncomplete = -1;
+
+      stepEls.forEach((step, idx) => {
+        const complete = isStepComplete(step);
+        step.classList.toggle('complete', complete);
+        step.classList.remove('active');
+
+        if (!complete && firstIncomplete === -1) {
+          firstIncomplete = idx;
+        }
       });
-      recalc();
-    })();
 
-    // Staff submit -> Supabase -> Complete
-    document.getElementById('staff-form').addEventListener('submit', async function(e){
-      e.preventDefault();
+      const currentIndex = (firstIncomplete === -1)
+        ? stepEls.length - 1
+        : firstIncomplete;
 
-      var payload = {
-        visitor: {
-          firstName: document.getElementById('v-first').value.trim(),
-          lastName: document.getElementById('v-last').value.trim(),
-          gender: document.getElementById('v-gender').value,
-          ageRange: document.getElementById('v-age').value,
-          country: document.getElementById('v-country').value,
-          city: document.getElementById('v-city').value.trim(),
-          thaiProvince: document.getElementById('v-province').value || '',
-          source: document.getElementById('v-source').value,
-          consent: document.getElementById('v-consent').checked
-        },
-        staff: {
-          staffName: document.getElementById('s-staff').value,
-          ticketType: document.getElementById('s-ticket').value,
-          ticketQty: document.getElementById('s-qty').value,
-          amountPaid: document.getElementById('s-amount').value,
-          payMethod: (document.querySelector('input[name=pay]:checked') || {}).value || ''
-        },
-        submittedAt: new Date().toISOString()
-      };
+      stepEls[currentIndex].classList.add('active');
+    }
 
-      var btn = document.getElementById('finalize');
-      var old = btn.textContent;
-      btn.textContent = 'กำลังส่ง... / Submitting...';
-      btn.disabled = true;
-
-      try {
-        await submitToSupabase(payload);
-        show('screen-complete');
-      } catch (err) {
-        console.error('[Submit Error]', err);
-        alert('บันทึกลงระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง');
-      } finally {
-        btn.textContent = old;
-        btn.disabled = false;
-      }
-    });
-
-    // Complete -> Back to start
-    document.getElementById('back-to-start').addEventListener('click', function(){
-      document.getElementById('visitor-form').reset();
-      document.getElementById('staff-form').reset();
-      show('screen-visitor');
-    });
-    // ---------- STEP HIGHLIGHT + PROGRESS BAR FOR VISITOR FORM ----------
-    (function(){
-      const stepEls = Array.from(document.querySelectorAll('#visitor-form .form-step'));
-      if (!stepEls.length) return;
-
-      const fillEl   = document.getElementById('visitor-progress-fill');
-      const labelEl  = document.getElementById('visitor-progress-label');
-      const pSteps   = Array.from(document.querySelectorAll('#visitor-progress .progress-step'));
-      const totalSteps = stepEls.length; // 4
-
-      function isStepComplete(step){
-        const fields = step.querySelectorAll('input, select');
-        let hasRequired = false;
-        let allRequiredFilled = true;
-
-        fields.forEach(f => {
-          if (f.hasAttribute('required')) {
-            hasRequired = true;
-            if (!f.value) {
-              allRequiredFilled = false;
-            }
+    const fields = document.querySelectorAll('.form-step input, .form-step select');
+    fields.forEach(f => {
+      f.addEventListener('focus', () => {
+        const step = f.closest('.form-step');
+        if (!step) return;
+        stepEls.forEach(s => {
+          if (!s.classList.contains('complete')) {
+            s.classList.remove('active');
           }
         });
-
-        return hasRequired && allRequiredFilled;
-      }
-
-      function refreshSteps(){
-  let firstIncomplete = -1;
-
-  // เช็กว่าแต่ละ step ครบหรือยัง
-  stepEls.forEach((step, idx) => {
-    const complete = isStepComplete(step);
-    step.classList.toggle('complete', complete);
-    step.classList.remove('active', 'next');
-
-    if (!complete && firstIncomplete === -1) {
-      firstIncomplete = idx;
-    }
-  });
-
-  const allComplete = (firstIncomplete === -1);
-  let currentStepIndex;
-
-  if (allComplete) {
-    currentStepIndex = totalSteps - 1;   // focus step สุดท้าย
-  } else {
-    currentStepIndex = firstIncomplete;  // step แรกที่ยังไม่ครบ
-  }
-  const currentStepNumber = currentStepIndex + 1;
-
-  // ---------- กล่อง step ด้านล่าง ----------
-  if (allComplete) {
-    // ครบทุก step → ทุกกล่องเป็น complete
-    stepEls.forEach(s => {
-      s.classList.remove('active','next');
-      s.classList.add('complete');
-    });
-  } else {
-    stepEls.forEach((s, i) => {
-      s.classList.remove('active','next');
-      if (i === currentStepIndex) {
-        s.classList.add('active');
-      } else if (i === currentStepIndex + 1) {
-        s.classList.add('next');
-      }
-    });
-  }
-
-  // ---------- เส้น progress ----------
-  const percent = (allComplete ? 100 : (currentStepNumber / totalSteps) * 100);
-  if (fillEl) fillEl.style.width = percent + '%';
-  if (labelEl) labelEl.textContent = `Step ${currentStepNumber} of ${totalSteps}`;
-
-  // ---------- แท็บด้านบน (dot / tile เขียว) ----------
-  pSteps.forEach(ps => {
-    const sNum = Number(ps.getAttribute('data-step'));
-    ps.classList.remove('active','complete');
-
-    if (allComplete) {
-      // กรอกครบแล้ว → ทุกอันเขียว
-      ps.classList.add('complete');
-    } else {
-      if (sNum < currentStepNumber) {
-        ps.classList.add('complete');
-      } else if (sNum === currentStepNumber) {
-        ps.classList.add('active');
-      }
-    }
-  });
-}
-      
-      // bind events
-      const fields = document.querySelectorAll('#visitor-form .form-step input, #visitor-form .form-step select');
-      fields.forEach(f => {
-        f.addEventListener('focus', () => {
-          const step = f.closest('.form-step');
-          if (!step) return;
-          stepEls.forEach(s => {
-            if (!s.classList.contains('complete')) {
-              s.classList.remove('active','next');
-            }
-          });
+        if (!step.classList.contains('complete')) {
           step.classList.add('active');
-        });
-
-        ['change', 'input', 'blur'].forEach(ev => {
-          f.addEventListener(ev, refreshSteps);
-        });
+        }
       });
 
-      // run once at start
-      refreshSteps();
-    })();
+      f.addEventListener('input', refreshSteps);
+      f.addEventListener('change', refreshSteps);
+    });
+
+    refreshSteps();
+  })();
+</script>
+
    
   </script>
 </body>
