@@ -1092,6 +1092,14 @@
     refreshSteps();
   })();
 
+/* ปรับขนาดตัวหนังสือของ select ให้ใหญ่ขึ้นบน iPad / tablet */
+@media (min-width: 768px) and (pointer: coarse) {
+  select,
+  select option {
+    font-size: 22px;     /* ลอง 22px ถ้าอยากใหญ่อีกค่อยขยับ */
+    line-height: 1.6;
+  }
+}
 
    
   </script>
