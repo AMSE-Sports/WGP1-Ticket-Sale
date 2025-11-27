@@ -257,13 +257,14 @@
     .medium-text.th {
       margin-top:4px;
     }
-
-    .complete {
-      text-align:center;
-      padding:48px 20px;
-      color:#fff;
-      background:linear-gradient(135deg, var(--ok), #4ade80);
-    }
+    
+/* ใหม่ */
+.final-complete {
+  text-align:center;
+  padding:48px 20px;
+  color:#fff;
+  background:linear-gradient(135deg, var(--ok), #4ade80);
+}
 
     .pay-choice {
       display:inline-flex;
@@ -595,6 +596,8 @@
               </select>
             </div>
             <div>
+              </div>
+            
               <label class="title">6. เมืองที่อาศัย<span class="en"> / City</span> *</label>
               <input id="v-city" required pattern="[\u0E00-\u0E7F a-zA-Z-]+" placeholder="เช่น Pattaya / กรุงเทพฯ">
               <div class="note">
@@ -675,7 +678,7 @@
               </div>
 
               <label class="consent-check">
-                <input type="checkbox" id="v-consent" required>
+                <input type="checkbox" id="v-consent" name="v-consent" required>
                 <span>
                   ฉันได้อ่านและยินยอมตามเงื่อนไขข้างต้น<br>
                   I have read and consent to the conditions above.
@@ -791,7 +794,7 @@
   <!-- SCREEN 4: COMPLETE -->
   <section id="screen-complete" class="screen container hidden">
     <div class="card">
-      <div class="complete">
+      <div class="final-complete">
         <h2 style="margin:0 0 8px 0;">COMPLETE ✅</h2>
         <p style="margin:0">ดำเนินการเสร็จสิ้นแล้ว — พร้อมรับผู้ชมคนถัดไป</p>
       </div>
@@ -869,6 +872,7 @@
         ageRange: document.getElementById('v-age').value,
         country: document.getElementById('v-country').value,
         city: document.getElementById('v-city').value.trim(),
+        source: sourceValue,
         consent: document.getElementById('v-consent').checked
       },
       staff: {
