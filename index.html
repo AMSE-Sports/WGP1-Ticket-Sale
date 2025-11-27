@@ -8,9 +8,10 @@
   <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
   <script>
-    const SUPABASE_URL = 'https://ublogcckdylmiehzqsuh.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVibG9nY2NrZHlsbWllaHpxc3VoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI5NjQ4NzQsImV4cCI6MjA3ODU0MDg3NH0.v9sp9NzJBQ1DopdtMarwdTX3KMl8DNXY176zCUCAhx0';
-
+    const SUPABASE_URL = 'https://mhecpnqwwxspxfhdvzsc.supabase.co';
+const SUPABASE_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1oZWNwbnF3d3hzcHhmaGR2enNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMDc0MjEsImV4cCI6MjA3ODU4MzQyMX0.ONaEMqU6BHuMSywE3Yvtbj78NqBbecI18amsD18Cgnc';
+    
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function submitToSupabase(payload) {
@@ -864,25 +865,25 @@
     const sourceValue = sourceChecks.map(c => c.value).join(', ');
 
     var payload = {
-      visitor: {
-        firstName: document.getElementById('v-first').value.trim(),
-        lastName: document.getElementById('v-last').value.trim(),
-        gender: document.getElementById('v-gender').value,
-        ageRange: document.getElementById('v-age').value,
-        country: document.getElementById('v-country').value,
-        city: document.getElementById('v-city').value.trim(),
-        source: sourceValue,
-        consent: document.getElementById('v-consent').checked
-      },
-      staff: {
-        staffName: document.getElementById('s-staff').value,
-        ticketType: document.getElementById('s-ticket').value,
-        ticketQty: document.getElementById('s-qty').value,
-        amountPaid: document.getElementById('s-amount').value,
-        payMethod: (document.querySelector('input[name=pay]:checked') || {}).value || ''
-      },
-      submittedAt: new Date().toISOString()
-    };
+  visitor: {
+    firstName: document.getElementById('v-first').value.trim(),
+    lastName: document.getElementById('v-last').value.trim(),
+    gender: document.getElementById('v-gender').value,
+    ageRange: document.getElementById('v-age').value,
+    country: document.getElementById('v-country').value,
+    city: document.getElementById('v-city').value.trim(),
+    source: sourceValue, // 👈 เพิ่มบรรทัดนี้
+    consent: document.getElementById('v-consent').checked
+  },
+  staff: {
+    staffName: document.getElementById('s-staff').value,
+    ticketType: document.getElementById('s-ticket').value,
+    ticketQty: document.getElementById('s-qty').value,
+    amountPaid: document.getElementById('s-amount').value,
+    payMethod: (document.querySelector('input[name=pay]:checked') || {}).value || ''
+  },
+  submittedAt: new Date().toISOString()
+};
 
     var btn = document.getElementById('finalize');
     var old = btn.textContent;
