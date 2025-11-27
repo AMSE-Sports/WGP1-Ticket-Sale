@@ -27,7 +27,7 @@
           visitor_age_range: visitor.ageRange,
           visitor_country: visitor.country,
           visitor_city: visitor.city,
-          visitor_thai_province: visitor.thaiProvince,
+          visitor_thai_province: null,
           visitor_source: visitor.source,
           visitor_consent: !!visitor.consent,
           staff_name: staff.staffName,
@@ -50,7 +50,6 @@
       --border:#ececec;
       --ok:#16a34a;
 
-      /* ขยายฟอนต์ให้ใหญ่ขึ้น */
       --font-base:   clamp(18px, 2vw, 22px);
       --font-label:  clamp(17px, 1.9vw, 21px);
       --font-title:  clamp(24px, 2.6vw, 32px);
@@ -72,7 +71,6 @@
     .header { background:#000; }
     .header img { display:block; width:100%; height:auto; }
 
-    /* ให้ฟอร์มเต็มหน้าจอทุกอุปกรณ์ */
     .container {
       width:100%;
       max-width:none;
@@ -115,71 +113,68 @@
     @media (min-width:760px) {
       .row.two { grid-template-columns:1fr 1fr; }
     }
-  /* กล่องของแต่ละ STEP */
-.form-step {
-  position: relative;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  margin-bottom: 18px;
-  background: #fff;
-  padding: 58px 16px 16px; /* เผื่อพื้นที่ด้านบนสำหรับแถบ STEP */
-  transition: border-color .2s, box-shadow .2s, background .2s;
-}
 
-/* แถบ STEP ด้านบน — ใช้ layout แบบเดียวกันทุกสถานะ */
-.form-step .step-badge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;                 /* ให้เต็มกว้างกล่อง */
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;  /* ตัวหนังสืออยู่กึ่งกลางเสมอ */
-  border-radius: 16px 16px 0 0;
-  font-size: var(--font-note);
-  font-weight: 800;
-  background: #f3f4f6;      /* สีพื้น default */
-  color: #111;
-  border-bottom: 1px solid var(--border);
-}
+    /* กล่องของแต่ละ STEP */
+    .form-step {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 18px;
+      background: #fff;
+      padding: 58px 16px 16px;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
 
-/* STEP กำลังกรอกอยู่ (active) */
-.form-step.active {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(243,112,33,.18);
-  background: #fffdf8;
-}
-.form-step.active .step-badge {
-  background: var(--primary);
-  color: #fff;
-  border-bottom-color: var(--primary);
-}
+    .form-step .step-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px 16px 0 0;
+      font-size: var(--font-note);
+      font-weight: 800;
+      background: #f3f4f6;
+      color: #111;
+      border-bottom: 1px solid var(--border);
+    }
 
-/* STEP กรอกครบแล้ว (complete) */
-.form-step.complete {
-  border-color: #16a34a;
-  background: #dcfce7;
-}
-.form-step.complete .step-badge {
-  background: #16a34a;
-  color: #fff;
-  border-bottom-color: #16a34a;
-}
+    .form-step.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(243,112,33,.18);
+      background: #fffdf8;
+    }
+    .form-step.active .step-badge {
+      background: var(--primary);
+      color: #fff;
+      border-bottom-color: var(--primary);
+    }
 
-/* ไม่ให้ตัวอักษรใน step ที่ complete จาง/หาย */
-.form-step.complete label.title,
-.form-step.complete .note,
-.form-step.complete input,
-.form-step.complete select {
-  color:#111 !important;
-}
-.form-step.complete input::placeholder,
-.form-step.complete select::placeholder {
-  color:#9ca3af;
-}
+    .form-step.complete {
+      border-color: #16a34a;
+      background: #dcfce7;
+    }
+    .form-step.complete .step-badge {
+      background: #16a34a;
+      color: #fff;
+      border-bottom-color: #16a34a;
+    }
 
-        label.title {
+    .form-step.complete label.title,
+    .form-step.complete .note,
+    .form-step.complete input,
+    .form-step.complete select {
+      color:#111 !important;
+    }
+    .form-step.complete input::placeholder,
+    .form-step.complete select::placeholder {
+      color:#9ca3af;
+    }
+
+    label.title {
       font-weight:800;
       font-size:var(--font-label);
       margin-bottom:6px;
@@ -226,53 +221,43 @@
     .btn.dark { background:#111; color:#fff; }
     .btn.wide { width:100%; }
 
- .thankfull {
-  min-height:70vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  background:#e97435;
-  padding:80px 20px;
-}
+    .thankfull {
+      min-height:70vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      background:#e97435;
+      padding:80px 20px;
+    }
+    .text-block { max-width:900px; }
 
-.text-block {
-  max-width:900px;
-}
+    .big-text {
+      font-size:clamp(40px, 5.8vw, 72px);
+      font-weight:900;
+      line-height:1.25;
+      color:#fff;
+      margin:0 0 24px;
+      text-shadow:0 3px 12px rgba(0,0,0,0.25);
+    }
+    .big-text.th {
+      font-size:clamp(34px, 4.8vw, 58px);
+      margin-top:10px;
+    }
+    .medium-text {
+      font-size:clamp(20px, 3vw, 30px);
+      font-weight:600;
+      line-height:1.6;
+      color:#fff;
+      margin:10px 0 16px;
+      opacity:0.95;
+      text-shadow:0 2px 8px rgba(0,0,0,0.25);
+    }
+    .big-text.th,
+    .medium-text.th {
+      margin-top:4px;
+    }
 
-/* ข้อความหัวข้อใหญ่ */
-/* หัวข้อความขนาดใหญ่ EN + TH */
-.big-text {
-  font-size:clamp(40px, 5.8vw, 72px);   /* ใหญ่ขึ้นอย่างชัดเจน */
-  font-weight:900;
-  line-height:1.25;
-  color:#fff;
-  margin:0 0 24px;
-  text-shadow:0 3px 12px rgba(0,0,0,0.25);
-}
-
-/* ภาษาไทยกว้างกว่าภาษาอังกฤษ ปรับขนาดให้ใกล้กัน */
-.big-text.th {
-  font-size:clamp(34px, 4.8vw, 58px);
-  margin-top:10px;
-}
-
-/* ข้อความขนาดกลาง */
-.medium-text {
-  font-size:clamp(20px, 3vw, 30px);
-  font-weight:600;
-  line-height:1.6;
-  color:#fff;
-  margin:10px 0 16px;
-  opacity:0.95;
-  text-shadow:0 2px 8px rgba(0,0,0,0.25);
-}
-
-/* Spacing ภาษาไทยให้เนียนกว่า EN */
-.big-text.th,
-.medium-text.th {
-  margin-top:4px;
-}
     .complete {
       text-align:center;
       padding:48px 20px;
@@ -310,7 +295,6 @@
       accent-color:var(--primary);
     }
 
-    /* Consent checkbox 2 บรรทัด + ขนาดพอ ๆ กับตัวหนังสือ */
     label.consent-check {
       display:flex;
       gap:10px;
@@ -328,81 +312,18 @@
       flex:1 1 auto;
       line-height:1.5;
     }
+
     .consent-desc { margin-bottom:10px; }
 
-    /* ปุ่มอ่านรายละเอียด */
-    .link-btn {
-      border:0;
-      background:none;
-      padding:0;
-      margin-left:6px;
-      color:var(--primary);
-      cursor:pointer;
-      text-decoration:underline;
-      font-size:var(--font-note);
-      font-weight:600;
-    }
+    .modal { display:none; } /* (ยังไม่ได้ใช้ modal ในหน้านี้) */
 
-    /* Modal แสดงรายละเอียด Consent */
-    .modal {
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index:50;
+    @media (min-width: 768px) and (pointer: coarse) {
+      select,
+      select option {
+        font-size: 22px;
+        line-height: 1.6;
+      }
     }
-    .modal-backdrop {
-      position:absolute;
-      inset:0;
-      background:rgba(0,0,0,0.55);
-    }
-    .modal-content {
-      position:relative;
-      max-width:900px;
-      max-height:80vh;
-      width:90%;
-      background:#fff;
-      border-radius:18px;
-      padding:24px 20px;
-      box-shadow:0 18px 40px rgba(0,0,0,0.4);
-      overflow:auto;
-      font-size:var(--font-base);
-    }
-    .modal-content h3 {
-      margin-top:0;
-      margin-bottom:10px;
-      font-size:clamp(20px, 2.4vw, 26px);
-      font-weight:800;
-    }
-    .modal-content h4 {
-      margin-top:16px;
-      margin-bottom:6px;
-      font-size:clamp(17px, 2.1vw, 22px);
-      font-weight:700;
-    }
-    .modal-content p {
-      margin:4px 0 10px;
-      line-height:1.6;
-    }
-    .modal-close {
-      position:absolute;
-      top:10px;
-      right:12px;
-      border:0;
-      background:transparent;
-      font-size:28px;
-      line-height:1;
-      cursor:pointer;
-    }
-    /* ปรับขนาดตัวหนังสือของ select ให้ใหญ่ขึ้นบน iPad / tablet */
-@media (min-width: 768px) and (pointer: coarse) {
-  select,
-  select option {
-    font-size: 22px;     /* ลอง 22px ถ้าอยากใหญ่อีกค่อยขยับ */
-    line-height: 1.6;
-  }
-}
   </style>
 </head>
 <body>
@@ -418,7 +339,7 @@
       </div>
       <form class="body" id="visitor-form">
 
-        <!-- STEP 1 : Name (1–2) -->
+        <!-- STEP 1 : Name -->
         <div class="form-step" data-step="1">
           <div class="step-badge">STEP 1</div>
 
@@ -438,7 +359,7 @@
           </div>
         </div>
 
-        <!-- STEP 2 : Gender / Age (3–4) -->
+        <!-- STEP 2 : Gender / Age -->
         <div class="form-step" data-step="2">
           <div class="step-badge">STEP 2</div>
 
@@ -466,7 +387,7 @@
           </div>
         </div>
 
-        <!-- STEP 3 : Country / Province / City (5, 5.1, 6) -->
+        <!-- STEP 3 : Country / Province / City -->
         <div class="form-step" data-step="3">
           <div class="step-badge">STEP 3</div>
 
@@ -682,142 +603,85 @@
             </div>
           </div>
 
-          <div class="row" id="thai-province-row" style="display:none">
-            <div>
-              <label class="title">5.1 จังหวัดในประเทศไทย<span class="en"> / Thai Province (if in Thailand)</span> *</label>
-              <select id="v-province">
-              <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
-              <option value="กระบี่">กระบี่</option>
-              <option value="กาญจนบุรี">กาญจนบุรี</option>
-              <option value="กาฬสินธุ์">กาฬสินธุ์</option>
-              <option value="กำแพงเพชร">กำแพงเพชร</option>
-              <option value="ขอนแก่น">ขอนแก่น</option>
-              <option value="จันทบุรี">จันทบุรี</option>
-              <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option>
-              <option value="ชลบุรี">ชลบุรี</option>
-              <option value="ชัยนาท">ชัยนาท</option>
-              <option value="ชัยภูมิ">ชัยภูมิ</option>
-              <option value="ชุมพร">ชุมพร</option>
-              <option value="เชียงราย">เชียงราย</option>
-              <option value="เชียงใหม่">เชียงใหม่</option>
-              <option value="ตรัง">ตรัง</option>
-              <option value="ตราด">ตราด</option>
-              <option value="ตาก">ตาก</option>
-              <option value="นครนายก">นครนายก</option>
-              <option value="นครปฐม">นครปฐม</option>
-              <option value="นครพนม">นครพนม</option>
-              <option value="นครราชสีมา">นครราชสีมา</option>
-              <option value="นครศรีธรรมราช">นครศรีธรรมราช</option>
-              <option value="นครสวรรค์">นครสวรรค์</option>
-              <option value="นนทบุรี">นนทบุรี</option>
-              <option value="นราธิวาส">นราธิวาส</option>
-              <option value="น่าน">น่าน</option>
-              <option value="บึงกาฬ">บึงกาฬ</option>
-              <option value="บุรีรัมย์">บุรีรัมย์</option>
-              <option value="ปทุมธานี">ปทุมธานี</option>
-              <option value="ประจวบคีรีขันธ์">ประจวบคีรีขันธ์</option>
-              <option value="ปราจีนบุรี">ปราจีนบุรี</option>
-              <option value="ปัตตานี">ปัตตานี</option>
-              <option value="พระนครศรีอยุธยา">พระนครศรีอยุธยา</option>
-              <option value="พังงา">พังงา</option>
-              <option value="พัทลุง">พัทลุง</option>
-              <option value="พิจิตร">พิจิตร</option>
-              <option value="พิษณุโลก">พิษณุโลก</option>
-              <option value="เพชรบุรี">เพชรบุรี</option>
-              <option value="เพชรบูรณ์">เพชรบูรณ์</option>
-              <option value="แพร่">แพร่</option>
-              <option value="พะเยา">พะเยา</option>
-              <option value="ภูเก็ต">ภูเก็ต</option>
-              <option value="มหาสารคาม">มหาสารคาม</option>
-              <option value="มุกดาหาร">มุกดาหาร</option>
-              <option value="แม่ฮ่องสอน">แม่ฮ่องสอน</option>
-              <option value="ยโสธร">ยโสธร</option>
-              <option value="ยะลา">ยะลา</option>
-              <option value="ร้อยเอ็ด">ร้อยเอ็ด</option>
-              <option value="ระนอง">ระนอง</option>
-              <option value="ระยอง">ระยอง</option>
-              <option value="ราชบุรี">ราชบุรี</option>
-              <option value="ลพบุรี">ลพบุรี</option>
-              <option value="ลำปาง">ลำปาง</option>
-              <option value="ลำพูน">ลำพูน</option>
-              <option value="ศรีสะเกษ">ศรีสะเกษ</option>
-              <option value="สกลนคร">สกลนคร</option>
-              <option value="สงขลา">สงขลา</option>
-              <option value="สตูล">สตูล</option>
-              <option value="สมุทรปราการ">สมุทรปราการ</option>
-              <option value="สมุทรสงคราม">สมุทรสงคราม</option>
-              <option value="สมุทรสาคร">สมุทรสาคร</option>
-              <option value="สระแก้ว">สระแก้ว</option>
-              <option value="สระบุรี">สระบุรี</option>
-              <option value="สิงห์บุรี">สิงห์บุรี</option>
-              <option value="สุโขทัย">สุโขทัย</option>
-              <option value="สุพรรณบุรี">สุพรรณบุรี</option>
-              <option value="สุราษฎร์ธานี">สุราษฎร์ธานี</option>
-              <option value="สุรินทร์">สุรินทร์</option>
-              <option value="หนองคาย">หนองคาย</option>
-              <option value="หนองบัวลำภู">หนองบัวลำภู</option>
-              <option value="อ่างทอง">อ่างทอง</option>
-              <option value="อำนาจเจริญ">อำนาจเจริญ</option>
-              <option value="อุดรธานี">อุดรธานี</option>
-              <option value="อุตรดิตถ์">อุตรดิตถ์</option>
-              <option value="อุทัยธานี">อุทัยธานี</option>
-              <option value="อุบลราชธานี">อุบลราชธานี</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 4 : Source (7) -->
+        <!-- STEP 4 : Source (multi-select checkboxes) -->
         <div class="form-step" data-step="4">
           <div class="step-badge">STEP 4</div>
 
           <div class="row">
             <div>
-              <label class="title">7. คุณทราบข่าวจากสื่อใด<span class="en"> / How did you hear about us?</span> *</label>
-              <select id="v-source" required>
-                <option value="">— เลือกช่องทาง / Select —</option>
-                <option value="pattaya-promotions">From Promotions in Pattaya จากการประชาสัมพันธ์ในเมือง</option>
-                <option value="online-media">From online media จากช่องทางออนไลน์</option>
-                <option value="news-tv">From news and TV จาก หนังสือพิมพ์ หรือโทรทัศน์</option>
-                <option value="world-series-2025">From the World Series 2025 จากงาน เวิล์ดซีรีส์ 2025</option>
-                <option value="friend">From a Friend or Acquaintance จากเพื่อนหรือคนรู้จัก</option>
-              </select>
+              <label class="title">
+                7. คุณทราบข่าวจากสื่อใด
+                <span class="en">/ How did you hear about us?</span> *
+              </label>
+              <div class="note" style="margin-bottom:8px;">
+                เลือกได้มากกว่า 1 ข้อ • You may select more than one channel.
+              </div>
+
+              <div class="source-options">
+                <label class="consent-check">
+                  <input type="checkbox" name="v-source" value="pattaya-promotions">
+                  <span>From Promotions in Pattaya / จากการประชาสัมพันธ์ในเมือง</span>
+                </label>
+
+                <label class="consent-check">
+                  <input type="checkbox" name="v-source" value="online-media">
+                  <span>From Online Media / จากช่องทางออนไลน์</span>
+                </label>
+
+                <label class="consent-check">
+                  <input type="checkbox" name="v-source" value="news-tv">
+                  <span>From News & TV / จากหนังสือพิมพ์หรือโทรทัศน์</span>
+                </label>
+
+                <label class="consent-check">
+                  <input type="checkbox" name="v-source" value="world-series-2025">
+                  <span>From the World Series 2025 / จากงาน World Series 2025</span>
+                </label>
+
+                <label class="consent-check">
+                  <input type="checkbox" name="v-source" value="friend">
+                  <span>From a Friend or Acquaintance / จากเพื่อนหรือคนรู้จัก</span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Consent -->
-               <!-- Consent -->
-        <div class="row">
-          <div>
-            <label class="title">ความยินยอม<span class="en">/ Consent</span> *</label>
+        <!-- STEP 5 : Consent -->
+        <div class="form-step" data-step="5">
+          <div class="step-badge">STEP 5</div>
 
-            <div class="consent-desc">
-              <strong>EN: Media (Photo & Video) & Personal Data</strong>
-              <p class="note">
-                By attending the WGP#1 Waterjet World Cup 2025, which includes live broadcasting and global media coverage,
-                you grant the event organizers and their partners the right to photograph, film, and record your image and voice
-                for use in promotions, advertising, live streams, and other media—without the need for further consent or
-                compensation. Entering the event area constitutes full and unconditional consent. If you do not wish to appear
-                in such media, please avoid camera zones or broadcast areas.
-              </p>
+          <div class="row">
+            <div>
+              <label class="title">ความยินยอม<span class="en">/ Consent</span> *</label>
 
-              <strong>TH: การเก็บข้อมูลส่วนบุคคล และการบันทึกภาพ/วิดีโอ</strong>
-              <p class="note">
-                ในการเข้าชมการแข่งขัน WGP#1 Waterjet World Cup 2025 ซึ่งมีการถ่ายทอดสดและเผยแพร่สู่สาธารณะทั่วโลก
-                ท่านยินยอมให้ผู้จัดงานและพันธมิตร สามารถบันทึกภาพนิ่ง วิดีโอ และเสียงของท่าน เพื่อใช้ในสื่อประชาสัมพันธ์
-                โฆษณา ถ่ายทอดสด และสื่ออื่น ๆ โดยไม่ต้องขออนุญาตหรือจ่ายค่าตอบแทนใด ๆ เพิ่มเติม การเข้าสู่พื้นที่จัดงาน
-                ถือเป็นการให้ความยินยอมโดยสมบูรณ์ หากไม่ประสงค์ให้ถูกบันทึกภาพ โปรดหลีกเลี่ยงบริเวณกล้องหรือพื้นที่ถ่ายทอดสด
-              </p>
+              <div class="consent-desc">
+                <strong>EN: Media (Photo & Video) & Personal Data</strong>
+                <p class="note">
+                  By attending the WGP#1 Waterjet World Cup 2025, which includes live broadcasting and global media coverage,
+                  you grant the event organizers and their partners the right to photograph, film, and record your image and voice
+                  for use in promotions, advertising, live streams, and other media—without the need for further consent or
+                  compensation. Entering the event area constitutes full and unconditional consent. If you do not wish to appear
+                  in such media, please avoid camera zones or broadcast areas.
+                </p>
+
+                <strong>TH: การเก็บข้อมูลส่วนบุคคล และการบันทึกภาพ/วิดีโอ</strong>
+                <p class="note">
+                  ในการเข้าชมการแข่งขัน WGP#1 Waterjet World Cup 2025 ซึ่งมีการถ่ายทอดสดและเผยแพร่สู่สาธารณะทั่วโลก
+                  ท่านยินยอมให้ผู้จัดงานและพันธมิตร สามารถบันทึกภาพนิ่ง วิดีโอ และเสียงของท่าน เพื่อใช้ในสื่อประชาสัมพันธ์
+                  โฆษณา ถ่ายทอดสด และสื่ออื่น ๆ โดยไม่ต้องขออนุญาตหรือจ่ายค่าตอบแทนใด ๆ เพิ่มเติม การเข้าสู่พื้นที่จัดงาน
+                  ถือเป็นการให้ความยินยอมโดยสมบูรณ์ หากไม่ประสงค์ให้ถูกบันทึกภาพ โปรดหลีกเลี่ยงบริเวณกล้องหรือพื้นที่ถ่ายทอดสด
+                </p>
+              </div>
+
+              <label class="consent-check">
+                <input type="checkbox" id="v-consent" required>
+                <span>
+                  ฉันได้อ่านและยินยอมตามเงื่อนไขข้างต้น<br>
+                  I have read and consent to the conditions above.
+                </span>
+              </label>
             </div>
-
-            <label class="consent-check">
-              <input type="checkbox" id="v-consent" required>
-              <span>
-                ฉันได้อ่านและยินยอมตามเงื่อนไขข้างต้น<br>
-                I have read and consent to the conditions above.
-              </span>
-            </label>
           </div>
         </div>
 
@@ -832,25 +696,14 @@
   <!-- SCREEN 2: THANK YOU -->
   <section id="screen-thank" class="screen container hidden">
     <div class="card">
-     <div class="thankfull">
-  <div class="text-block">
-
-    <h2 class="big-text">
-      Ticket is being processed.
-    </h2>
-    <h2 class="big-text th">
-      ตั๋วของคุณกำลังอยู่ระหว่างดำเนินการ
-    </h2>
-
-    <p class="medium-text">
-      Please notify the staff to proceed to the next step.
-    </p>
-    <p class="medium-text th">
-      กรุณาแจ้งเจ้าหน้าที่เพื่อดำเนินการในขั้นตอนถัดไป
-    </p>
-
-  </div>
-</div>
+      <div class="thankfull">
+        <div class="text-block">
+          <h2 class="big-text">Ticket is being processed.</h2>
+          <h2 class="big-text th">ตั๋วของคุณกำลังอยู่ระหว่างดำเนินการ</h2>
+          <p class="medium-text">Please notify the staff to proceed to the next step.</p>
+          <p class="medium-text th">กรุณาแจ้งเจ้าหน้าที่เพื่อดำเนินการในขั้นตอนถัดไป</p>
+        </div>
+      </div>
 
       <div class="body" style="text-align:center">
         <button class="btn dark" id="to-staff">
@@ -951,20 +804,7 @@
   </section>
 
   <script>
-  // แสดง / ซ่อนช่องจังหวัดถ้าเลือก Thailand
-  (function(){
-    var c = document.getElementById('v-country');
-    var pr = document.getElementById('v-province');
-    var row = document.getElementById('thai-province-row');
-    function toggle(){
-      var isTH = (c.value === 'Thailand' || c.value === 'ไทย');
-      row.style.display = isTH ? 'grid' : 'none';
-      pr.required = !!isTH;
-      if (!isTH) pr.value = '';
-    }
-    c.addEventListener('change', toggle);
-    toggle();
-  })();
+ 
 
   function show(id){
     ['screen-visitor','screen-thank','screen-staff','screen-complete']
@@ -973,9 +813,16 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Visitor -> Thank
+  // Visitor -> Thank (เช็คว่ามีเลือก source อย่างน้อย 1 ช่องก่อน)
   document.getElementById('visitor-form').addEventListener('submit', function(e){
     e.preventDefault();
+
+    const sourceChecks = document.querySelectorAll('input[name="v-source"]:checked');
+    if (!sourceChecks.length) {
+      alert('กรุณาเลือกอย่างน้อย 1 ช่องทางในข้อ 7 (How did you hear about us?)');
+      return;
+    }
+
     show('screen-thank');
   });
 
@@ -1011,6 +858,9 @@
   document.getElementById('staff-form').addEventListener('submit', async function(e){
     e.preventDefault();
 
+    const sourceChecks = Array.from(document.querySelectorAll('input[name="v-source"]:checked'));
+    const sourceValue = sourceChecks.map(c => c.value).join(', ');
+
     var payload = {
       visitor: {
         firstName: document.getElementById('v-first').value.trim(),
@@ -1019,8 +869,6 @@
         ageRange: document.getElementById('v-age').value,
         country: document.getElementById('v-country').value,
         city: document.getElementById('v-city').value.trim(),
-        thaiProvince: document.getElementById('v-province').value || '',
-        source: document.getElementById('v-source').value,
         consent: document.getElementById('v-consent').checked
       },
       staff: {
@@ -1064,14 +912,24 @@
 
     function isStepComplete(stepEl){
       const requiredFields = stepEl.querySelectorAll('input[required], select[required]');
+
       for (const f of requiredFields) {
         if (f.type === 'checkbox' || f.type === 'radio') {
-          const checked = stepEl.querySelectorAll(`input[name="${f.name}"]:checked`);
+          const name = f.name;
+          const checked = stepEl.querySelectorAll(`input[name="${name}"]:checked`);
           if (!checked.length) return false;
         } else {
           if (!f.value || !String(f.value).trim()) return false;
         }
       }
+
+      // กรณี STEP 4: ต้องมี checkbox v-source อย่างน้อย 1 อัน
+      const sourceBoxes = stepEl.querySelectorAll('input[name="v-source"]');
+      if (sourceBoxes.length) {
+        const anyChecked = stepEl.querySelector('input[name="v-source"]:checked');
+        if (!anyChecked) return false;
+      }
+
       return true;
     }
 
@@ -1116,8 +974,6 @@
 
     refreshSteps();
   })();
-
-   
   </script>
 </body>
 </html>
