@@ -903,11 +903,14 @@ const SUPABASE_ANON_KEY =
   });
 
   // Complete -> Back to start
-  document.getElementById('back-to-start').addEventListener('click', function(){
-    document.getElementById('visitor-form').reset();
-    document.getElementById('staff-form').reset();
-    show('screen-visitor');
-  });
+ document.getElementById('back-to-start').addEventListener('click', function(){
+  document.getElementById('visitor-form').reset();
+  document.getElementById('staff-form').reset();
+
+  resetSteps();   // 👈 รีเซ็ตสีเขียวออกทั้งหมด
+
+  show('screen-visitor');
+});
 
   // ----- STEP HIGHLIGHT: active + complete -----
   (function(){
@@ -978,6 +981,18 @@ const SUPABASE_ANON_KEY =
 
     refreshSteps();
   })();
+
+    function resetSteps() {
+  const steps = document.querySelectorAll('.form-step');
+  steps.forEach(step => {
+    step.classList.remove('complete');
+    step.classList.remove('active');
+  });
+
+  // กำหนดให้ STEP 1 active อีกครั้ง
+  const firstStep = document.querySelector('.form-step[data-step="1"]');
+  if (firstStep) firstStep.classList.add('active');
+}
   </script>
 </body>
 </html>
