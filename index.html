@@ -9,9 +9,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
   <script>
     const SUPABASE_URL = 'https://mhecpnqwwxspxfhdvzsc.supabase.co';
-const SUPABASE_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1oZWNwbnF3d3hzcHhmaGR2enNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMDc0MjEsImV4cCI6MjA3ODU4MzQyMX0.ONaEMqU6BHuMSywE3Yvtbj78NqBbecI18amsD18Cgnc';
-    
+    const SUPABASE_ANON_KEY =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1oZWNwbnF3d3hzcHhmaGR2enNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMDc0MjEsImV4cCI6MjA3ODU4MzQyMX0.ONaEMqU6BHuMSywE3Yvtbj78NqBbecI18amsD18Cgnc';
+
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function submitToSupabase(payload) {
@@ -258,14 +258,13 @@ const SUPABASE_ANON_KEY =
     .medium-text.th {
       margin-top:4px;
     }
-    
-/* ใหม่ */
-.final-complete {
-  text-align:center;
-  padding:48px 20px;
-  color:#fff;
-  background:linear-gradient(135deg, var(--ok), #4ade80);
-}
+
+    .final-complete {
+      text-align:center;
+      padding:48px 20px;
+      color:#fff;
+      background:linear-gradient(135deg, var(--ok), #4ade80);
+    }
 
     .pay-choice {
       display:inline-flex;
@@ -317,7 +316,7 @@ const SUPABASE_ANON_KEY =
 
     .consent-desc { margin-bottom:10px; }
 
-    .modal { display:none; } /* (ยังไม่ได้ใช้ modal ในหน้านี้) */
+    .modal { display:none; }
 
     @media (min-width: 768px) and (pointer: coarse) {
       select,
@@ -326,37 +325,37 @@ const SUPABASE_ANON_KEY =
         line-height: 1.6;
       }
     }
-    
+
+    /* country autocomplete */
     .country-suggestions {
-  position:absolute;
-  z-index:40;
-  top:100%;
-  left:0;
-  right:0;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:12px;
-  margin-top:4px;
-  max-height:240px;
-  overflow-y:auto;
-  box-shadow:0 12px 30px rgba(15,23,42,0.18);
-}
+      position:absolute;
+      z-index:40;
+      top:100%;
+      left:0;
+      right:0;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      margin-top:4px;
+      max-height:240px;
+      overflow-y:auto;
+      box-shadow:0 12px 30px rgba(15,23,42,0.18);
+    }
 
-.country-suggestions div {
-  padding:10px 14px;
-  cursor:pointer;
-  font-size:var(--font-base);
-}
+    .country-suggestions div {
+      padding:10px 14px;
+      cursor:pointer;
+      font-size:var(--font-base);
+    }
 
-.country-suggestions div:hover {
-  background:#f3f4f6;
-}
+    .country-suggestions div:hover {
+      background:#f3f4f6;
+    }
 
-.country-suggestions .no-match {
-  color:#9ca3af;
-  cursor:default;
-}
-    
+    .country-suggestions .no-match {
+      color:#9ca3af;
+      cursor:default;
+    }
   </style>
 </head>
 <body>
@@ -420,55 +419,46 @@ const SUPABASE_ANON_KEY =
           </div>
         </div>
 
-             <!-- STEP 3 : Country / City -->
-<div class="form-step" data-step="3">
-  <div class="step-badge">STEP 3</div>
-
-  <div class="row two">
-    <div>
-      <label class="title">
         <!-- STEP 3 : Country / City -->
-<div class="form-step" data-step="3">
-  <div class="step-badge">STEP 3</div>
+        <div class="form-step" data-step="3">
+          <div class="step-badge">STEP 3</div>
 
-  <div class="row two">
-    <!-- COUNTRY AUTOCOMPLETE -->
-    <div style="position:relative;">
-      <label class="title">
-        5. ประเทศที่อาศัย
-        <span class="en"> / Country of Residence</span> *
-      </label>
-      <input
-        id="v-country"
-        autocomplete="off"
-        required
-        placeholder="เริ่มพิมพ์ 2–3 ตัวอักษร เช่น Tha, Jap, Uni...">
+          <div class="row two">
+            <!-- COUNTRY AUTOCOMPLETE -->
+            <div style="position:relative;">
+              <label class="title">
+                5. ประเทศที่อาศัย
+                <span class="en"> / Country of Residence</span> *
+              </label>
+              <input
+                id="v-country"
+                autocomplete="off"
+                required
+                placeholder="เริ่มพิมพ์ 2–3 ตัวอักษร เช่น Tha, Jap, Uni...">
 
-      <!-- กล่อง suggestion -->
-      <div id="country-suggestions" class="country-suggestions hidden"></div>
+              <div id="country-suggestions" class="country-suggestions hidden"></div>
 
-      <div class="note">
-        เริ่มพิมพ์ชื่อประเทศ ระบบจะแสดงรายการให้เลือกอัตโนมัติ • Type a few letters and pick from the list.
-      </div>
-    </div>
+              <div class="note">
+                เริ่มพิมพ์ชื่อประเทศ ระบบจะแสดงรายการให้เลือกอัตโนมัติ • Type a few letters and pick from the list.
+              </div>
+            </div>
 
-    <!-- CITY -->
-    <div>
-      <label class="title">
-        6. เมืองที่อาศัย<span class="en"> / City</span> *
-      </label>
-      <input
-        id="v-city"
-        required
-        pattern="[\u0E00-\u0E7F a-zA-Z-]+"
-        placeholder="เช่น Pattaya / กรุงเทพฯ">
-      <div class="note">
-        รองรับอักษรไทย/อังกฤษและช่องว่างเท่านั้น • Thai/English letters & spaces only
-      </div>
-    </div>
-  </div>
-</div>
-      
+            <!-- CITY -->
+            <div>
+              <label class="title">
+                6. เมืองที่อาศัย<span class="en"> / City</span> *
+              </label>
+              <input
+                id="v-city"
+                required
+                pattern="[\u0E00-\u0E7F a-zA-Z-]+"
+                placeholder="เช่น Pattaya / กรุงเทพฯ">
+              <div class="note">
+                รองรับอักษรไทย/อังกฤษและช่องว่างเท่านั้น • Thai/English letters & spaces only
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- STEP 4 : Source (multi-select checkboxes) -->
         <div class="form-step" data-step="4">
@@ -671,8 +661,6 @@ const SUPABASE_ANON_KEY =
   </section>
 
   <script>
- 
-
   function show(id){
     ['screen-visitor','screen-thank','screen-staff','screen-complete']
       .forEach(i => document.getElementById(i).classList.add('hidden'));
@@ -680,7 +668,7 @@ const SUPABASE_ANON_KEY =
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Visitor -> Thank (เช็คว่ามีเลือก source อย่างน้อย 1 ช่องก่อน)
+  // Visitor -> Thank
   document.getElementById('visitor-form').addEventListener('submit', function(e){
     e.preventDefault();
 
@@ -729,25 +717,25 @@ const SUPABASE_ANON_KEY =
     const sourceValue = sourceChecks.map(c => c.value).join(', ');
 
     var payload = {
-  visitor: {
-    firstName: document.getElementById('v-first').value.trim(),
-    lastName: document.getElementById('v-last').value.trim(),
-    gender: document.getElementById('v-gender').value,
-    ageRange: document.getElementById('v-age').value,
-    country: document.getElementById('v-country').value,
-    city: document.getElementById('v-city').value.trim(),
-    source: sourceValue, // 👈 เพิ่มบรรทัดนี้
-    consent: document.getElementById('v-consent').checked
-  },
-  staff: {
-    staffName: document.getElementById('s-staff').value,
-    ticketType: document.getElementById('s-ticket').value,
-    ticketQty: document.getElementById('s-qty').value,
-    amountPaid: document.getElementById('s-amount').value,
-    payMethod: (document.querySelector('input[name=pay]:checked') || {}).value || ''
-  },
-  submittedAt: new Date().toISOString()
-};
+      visitor: {
+        firstName: document.getElementById('v-first').value.trim(),
+        lastName: document.getElementById('v-last').value.trim(),
+        gender: document.getElementById('v-gender').value,
+        ageRange: document.getElementById('v-age').value,
+        country: document.getElementById('v-country').value,
+        city: document.getElementById('v-city').value.trim(),
+        source: sourceValue,
+        consent: document.getElementById('v-consent').checked
+      },
+      staff: {
+        staffName: document.getElementById('s-staff').value,
+        ticketType: document.getElementById('s-ticket').value,
+        ticketQty: document.getElementById('s-qty').value,
+        amountPaid: document.getElementById('s-amount').value,
+        payMethod: (document.querySelector('input[name=pay]:checked') || {}).value || ''
+      },
+      submittedAt: new Date().toISOString()
+    };
 
     var btn = document.getElementById('finalize');
     var old = btn.textContent;
@@ -767,16 +755,15 @@ const SUPABASE_ANON_KEY =
   });
 
   // Complete -> Back to start
- document.getElementById('back-to-start').addEventListener('click', function(){
-  document.getElementById('visitor-form').reset();
-  document.getElementById('staff-form').reset();
+  document.getElementById('back-to-start').addEventListener('click', function(){
+    document.getElementById('visitor-form').reset();
+    document.getElementById('staff-form').reset();
 
-  resetSteps();   // 👈 รีเซ็ตสีเขียวออกทั้งหมด
+    resetSteps();
+    show('screen-visitor');
+  });
 
-  show('screen-visitor');
-});
-
-  // ----- STEP HIGHLIGHT: active + complete -----
+  // ----- STEP HIGHLIGHT -----
   (function(){
     const stepEls = Array.from(document.querySelectorAll('.form-step'));
     if (!stepEls.length) return;
@@ -794,7 +781,6 @@ const SUPABASE_ANON_KEY =
         }
       }
 
-      // กรณี STEP 4: ต้องมี checkbox v-source อย่างน้อย 1 อัน
       const sourceBoxes = stepEl.querySelectorAll('input[name="v-source"]');
       if (sourceBoxes.length) {
         const anyChecked = stepEl.querySelector('input[name="v-source"]:checked');
@@ -846,128 +832,36 @@ const SUPABASE_ANON_KEY =
     refreshSteps();
   })();
 
-    function resetSteps() {
-  const steps = document.querySelectorAll('.form-step');
-  steps.forEach(step => {
-    step.classList.remove('complete');
-    step.classList.remove('active');
-  });
+  function resetSteps() {
+    const steps = document.querySelectorAll('.form-step');
+    steps.forEach(step => {
+      step.classList.remove('complete');
+      step.classList.remove('active');
+    });
 
-  // กำหนดให้ STEP 1 active อีกครั้ง
-  const firstStep = document.querySelector('.form-step[data-step="1"]');
-  if (firstStep) firstStep.classList.add('active');
-}
-    <script>
+    const firstStep = document.querySelector('.form-step[data-step="1"]');
+    if (firstStep) firstStep.classList.add('active');
+  }
+
   // ===== Country Autocomplete (แทน datalist) =====
   (function () {
     const countries = [
-      "Thailand",
-      "Afghanistan",
-      "Albania",
-      "Algeria",
-      "Andorra",
-      "Angola",
-      "Argentina",
-      "Armenia",
-      "Australia",
-      "Austria",
-      "Azerbaijan",
-      "Bahamas",
-      "Bahrain",
-      "Bangladesh",
-      "Barbados",
-      "Belarus",
-      "Belgium",
-      "Belize",
-      "Benin",
-      "Bhutan",
-      "Bolivia",
-      "Bosnia and Herzegovina",
-      "Botswana",
-      "Brazil",
-      "Brunei",
-      "Bulgaria",
-      "Burkina Faso",
-      "Burundi",
-      "Cambodia",
-      "Cameroon",
-      "Canada",
-      "Chile",
-      "China",
-      "Colombia",
-      "Costa Rica",
-      "Croatia",
-      "Cuba",
-      "Cyprus",
-      "Czechia",
-      "Denmark",
-      "Dominican Republic",
-      "Ecuador",
-      "Egypt",
-      "Estonia",
-      "Finland",
-      "France",
-      "Germany",
-      "Greece",
-      "Hong Kong",
-      "Hungary",
-      "Iceland",
-      "India",
-      "Indonesia",
-      "Iran",
-      "Iraq",
-      "Ireland",
-      "Israel",
-      "Italy",
-      "Japan",
-      "Jordan",
-      "Kazakhstan",
-      "Kenya",
-      "Laos",
-      "Latvia",
-      "Lebanon",
-      "Lithuania",
-      "Luxembourg",
-      "Malaysia",
-      "Maldives",
-      "Mexico",
-      "Mongolia",
-      "Morocco",
-      "Myanmar",
-      "Nepal",
-      "Netherlands",
-      "New Zealand",
-      "Nigeria",
-      "Norway",
-      "Pakistan",
-      "Peru",
-      "Philippines",
-      "Poland",
-      "Portugal",
-      "Qatar",
-      "Romania",
-      "Russia",
-      "Saudi Arabia",
-      "Singapore",
-      "Slovakia",
-      "Slovenia",
-      "South Africa",
-      "South Korea",
-      "Spain",
-      "Sri Lanka",
-      "Sweden",
-      "Switzerland",
-      "Taiwan",
-      "Turkey",
-      "Ukraine",
-      "United Arab Emirates",
-      "United Kingdom",
-      "United States",
-      "Vietnam",
-      "Yemen",
-      "Zambia",
-      "Zimbabwe"
-      // ถ้าต้องการครบทุกประเทศ เอารายการจาก <option> เดิมมาเติมเพิ่มได้เลย
+      "Thailand","Afghanistan","Albania","Algeria","Andorra","Angola","Argentina",
+      "Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh",
+      "Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia",
+      "Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso",
+      "Burundi","Cambodia","Cameroon","Canada","Chile","China","Colombia",
+      "Costa Rica","Croatia","Cuba","Cyprus","Czechia","Denmark","Dominican Republic",
+      "Ecuador","Egypt","Estonia","Finland","France","Germany","Greece","Hong Kong",
+      "Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel",
+      "Italy","Japan","Jordan","Kazakhstan","Kenya","Laos","Latvia","Lebanon",
+      "Lithuania","Luxembourg","Malaysia","Maldives","Mexico","Mongolia","Morocco",
+      "Myanmar","Nepal","Netherlands","New Zealand","Nigeria","Norway","Pakistan",
+      "Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia",
+      "Saudi Arabia","Singapore","Slovakia","Slovenia","South Africa","South Korea",
+      "Spain","Sri Lanka","Sweden","Switzerland","Taiwan","Turkey","Ukraine",
+      "United Arab Emirates","United Kingdom","United States","Vietnam","Yemen",
+      "Zambia","Zimbabwe"
     ];
 
     const input = document.getElementById("v-country");
@@ -993,8 +887,8 @@ const SUPABASE_ANON_KEY =
         item.addEventListener("click", () => {
           input.value = name;
           box.classList.add("hidden");
-          input.dispatchEvent(new Event("input"));  // เพื่อให้ logic step ทำงาน
-          input.blur(); // ปิดคีย์บอร์ดบนมือถือ
+          input.dispatchEvent(new Event("input"));
+          input.blur();
         });
         box.appendChild(item);
       });
@@ -1009,21 +903,19 @@ const SUPABASE_ANON_KEY =
         return;
       }
 
-      // filter แบบเริ่มด้วยตัวอักษร หรือมีตัวอักษรนั้นอยู่
       const matches = countries.filter(c =>
         c.toLowerCase().startsWith(q) || c.toLowerCase().includes(q)
-      ).slice(0, 15); // จำกัดไม่เกิน 15 รายการ
+      ).slice(0, 15);
 
       showSuggestions(matches);
     });
 
-    // คลิกข้างนอก → ปิดกล่อง suggestion
     document.addEventListener("click", (e) => {
       if (!box.contains(e.target) && e.target !== input) {
         box.classList.add("hidden");
       }
     });
   })();
-</script>
+  </script>
 </body>
 </html>
