@@ -326,6 +326,37 @@ const SUPABASE_ANON_KEY =
         line-height: 1.6;
       }
     }
+    
+    .country-suggestions {
+  position:absolute;
+  z-index:40;
+  top:100%;
+  left:0;
+  right:0;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin-top:4px;
+  max-height:240px;
+  overflow-y:auto;
+  box-shadow:0 12px 30px rgba(15,23,42,0.18);
+}
+
+.country-suggestions div {
+  padding:10px 14px;
+  cursor:pointer;
+  font-size:var(--font-base);
+}
+
+.country-suggestions div:hover {
+  background:#f3f4f6;
+}
+
+.country-suggestions .no-match {
+  color:#9ca3af;
+  cursor:default;
+}
+    
   </style>
 </head>
 <body>
@@ -396,217 +427,32 @@ const SUPABASE_ANON_KEY =
   <div class="row two">
     <div>
       <label class="title">
+        <!-- STEP 3 : Country / City -->
+<div class="form-step" data-step="3">
+  <div class="step-badge">STEP 3</div>
+
+  <div class="row two">
+    <!-- COUNTRY AUTOCOMPLETE -->
+    <div style="position:relative;">
+      <label class="title">
         5. ประเทศที่อาศัย
         <span class="en"> / Country of Residence</span> *
       </label>
       <input
         id="v-country"
-        list="country-list"
+        autocomplete="off"
         required
         placeholder="เริ่มพิมพ์ 2–3 ตัวอักษร เช่น Tha, Jap, Uni...">
+
+      <!-- กล่อง suggestion -->
+      <div id="country-suggestions" class="country-suggestions hidden"></div>
+
       <div class="note">
         เริ่มพิมพ์ชื่อประเทศ ระบบจะแสดงรายการให้เลือกอัตโนมัติ • Type a few letters and pick from the list.
       </div>
-
-      <datalist id="country-list">
-        <option value="Thailand">
-        <option value="Afghanistan">
-        <option value="Albania">
-        <option value="Algeria">
-        <option value="Andorra">
-        <option value="Angola">
-        <option value="Antigua and Barbuda">
-        <option value="Argentina">
-        <option value="Armenia">
-        <option value="Australia">
-        <option value="Austria">
-        <option value="Azerbaijan">
-        <option value="Bahamas">
-        <option value="Bahrain">
-        <option value="Bangladesh">
-        <option value="Barbados">
-        <option value="Belarus">
-        <option value="Belgium">
-        <option value="Belize">
-        <option value="Benin">
-        <option value="Bhutan">
-        <option value="Bolivia">
-        <option value="Bosnia and Herzegovina">
-        <option value="Botswana">
-        <option value="Brazil">
-        <option value="Brunei">
-        <option value="Bulgaria">
-        <option value="Burkina Faso">
-        <option value="Burundi">
-        <option value="Cambodia">
-        <option value="Cameroon">
-        <option value="Canada">
-        <option value="Cape Verde">
-        <option value="Central African Republic">
-        <option value="Chad">
-        <option value="Chile">
-        <option value="China">
-        <option value="Colombia">
-        <option value="Comoros">
-        <option value="Congo">
-        <option value="Costa Rica">
-        <option value="Côte d’Ivoire">
-        <option value="Croatia">
-        <option value="Cuba">
-        <option value="Cyprus">
-        <option value="Czechia">
-        <option value="Democratic Republic of the Congo">
-        <option value="Denmark">
-        <option value="Djibouti">
-        <option value="Dominica">
-        <option value="Dominican Republic">
-        <option value="Ecuador">
-        <option value="Egypt">
-        <option value="El Salvador">
-        <option value="Equatorial Guinea">
-        <option value="Eritrea">
-        <option value="Estonia">
-        <option value="Eswatini">
-        <option value="Ethiopia">
-        <option value="Fiji">
-        <option value="Finland">
-        <option value="France">
-        <option value="Gabon">
-        <option value="Gambia">
-        <option value="Georgia">
-        <option value="Germany">
-        <option value="Ghana">
-        <option value="Greece">
-        <option value="Grenada">
-        <option value="Guatemala">
-        <option value="Guinea">
-        <option value="Guinea-Bissau">
-        <option value="Guyana">
-        <option value="Haiti">
-        <option value="Honduras">
-        <option value="Hong Kong">
-        <option value="Hungary">
-        <option value="Iceland">
-        <option value="India">
-        <option value="Indonesia">
-        <option value="Iran">
-        <option value="Iraq">
-        <option value="Ireland">
-        <option value="Israel">
-        <option value="Italy">
-        <option value="Jamaica">
-        <option value="Japan">
-        <option value="Jordan">
-        <option value="Kazakhstan">
-        <option value="Kenya">
-        <option value="Kiribati">
-        <option value="Kuwait">
-        <option value="Kyrgyzstan">
-        <option value="Laos">
-        <option value="Latvia">
-        <option value="Lebanon">
-        <option value="Lesotho">
-        <option value="Liberia">
-        <option value="Libya">
-        <option value="Liechtenstein">
-        <option value="Lithuania">
-        <option value="Luxembourg">
-        <option value="Madagascar">
-        <option value="Malawi">
-        <option value="Malaysia">
-        <option value="Maldives">
-        <option value="Mali">
-        <option value="Malta">
-        <option value="Marshall Islands">
-        <option value="Mauritania">
-        <option value="Mauritius">
-        <option value="Mexico">
-        <option value="Micronesia">
-        <option value="Moldova">
-        <option value="Monaco">
-        <option value="Mongolia">
-        <option value="Montenegro">
-        <option value="Morocco">
-        <option value="Mozambique">
-        <option value="Myanmar">
-        <option value="Namibia">
-        <option value="Nauru">
-        <option value="Nepal">
-        <option value="Netherlands">
-        <option value="New Zealand">
-        <option value="Nicaragua">
-        <option value="Niger">
-        <option value="Nigeria">
-        <option value="North Korea">
-        <option value="North Macedonia">
-        <option value="Norway">
-        <option value="Oman">
-        <option value="Pakistan">
-        <option value="Palau">
-        <option value="Panama">
-        <option value="Papua New Guinea">
-        <option value="Paraguay">
-        <option value="Peru">
-        <option value="Philippines">
-        <option value="Poland">
-        <option value="Portugal">
-        <option value="Qatar">
-        <option value="Romania">
-        <option value="Russia">
-        <option value="Rwanda">
-        <option value="Saint Kitts and Nevis">
-        <option value="Saint Lucia">
-        <option value="Saint Vincent and the Grenadines">
-        <option value="Samoa">
-        <option value="San Marino">
-        <option value="Sao Tome and Principe">
-        <option value="Saudi Arabia">
-        <option value="Senegal">
-        <option value="Serbia">
-        <option value="Seychelles">
-        <option value="Sierra Leone">
-        <option value="Singapore">
-        <option value="Slovakia">
-        <option value="Slovenia">
-        <option value="Solomon Islands">
-        <option value="Somalia">
-        <option value="South Africa">
-        <option value="South Korea">
-        <option value="South Sudan">
-        <option value="Spain">
-        <option value="Sri Lanka">
-        <option value="Sudan">
-        <option value="Suriname">
-        <option value="Sweden">
-        <option value="Switzerland">
-        <option value="Syria">
-        <option value="Taiwan">
-        <option value="Tajikistan">
-        <option value="Tanzania">
-        <option value="Timor-Leste">
-        <option value="Togo">
-        <option value="Tonga">
-        <option value="Trinidad and Tobago">
-        <option value="Tunisia">
-        <option value="Turkey">
-        <option value="Turkmenistan">
-        <option value="Tuvalu">
-        <option value="Uganda">
-        <option value="Ukraine">
-        <option value="United Arab Emirates">
-        <option value="United Kingdom">
-        <option value="United States">
-        <option value="Uruguay">
-        <option value="Uzbekistan">
-        <option value="Vanuatu">
-        <option value="Venezuela">
-        <option value="Vietnam">
-        <option value="Yemen">
-        <option value="Zambia">
-        <option value="Zimbabwe">
-      </datalist>
     </div>
 
+    <!-- CITY -->
     <div>
       <label class="title">
         6. เมืองที่อาศัย<span class="en"> / City</span> *
@@ -1011,6 +857,173 @@ const SUPABASE_ANON_KEY =
   const firstStep = document.querySelector('.form-step[data-step="1"]');
   if (firstStep) firstStep.classList.add('active');
 }
-  </script>
+    <script>
+  // ===== Country Autocomplete (แทน datalist) =====
+  (function () {
+    const countries = [
+      "Thailand",
+      "Afghanistan",
+      "Albania",
+      "Algeria",
+      "Andorra",
+      "Angola",
+      "Argentina",
+      "Armenia",
+      "Australia",
+      "Austria",
+      "Azerbaijan",
+      "Bahamas",
+      "Bahrain",
+      "Bangladesh",
+      "Barbados",
+      "Belarus",
+      "Belgium",
+      "Belize",
+      "Benin",
+      "Bhutan",
+      "Bolivia",
+      "Bosnia and Herzegovina",
+      "Botswana",
+      "Brazil",
+      "Brunei",
+      "Bulgaria",
+      "Burkina Faso",
+      "Burundi",
+      "Cambodia",
+      "Cameroon",
+      "Canada",
+      "Chile",
+      "China",
+      "Colombia",
+      "Costa Rica",
+      "Croatia",
+      "Cuba",
+      "Cyprus",
+      "Czechia",
+      "Denmark",
+      "Dominican Republic",
+      "Ecuador",
+      "Egypt",
+      "Estonia",
+      "Finland",
+      "France",
+      "Germany",
+      "Greece",
+      "Hong Kong",
+      "Hungary",
+      "Iceland",
+      "India",
+      "Indonesia",
+      "Iran",
+      "Iraq",
+      "Ireland",
+      "Israel",
+      "Italy",
+      "Japan",
+      "Jordan",
+      "Kazakhstan",
+      "Kenya",
+      "Laos",
+      "Latvia",
+      "Lebanon",
+      "Lithuania",
+      "Luxembourg",
+      "Malaysia",
+      "Maldives",
+      "Mexico",
+      "Mongolia",
+      "Morocco",
+      "Myanmar",
+      "Nepal",
+      "Netherlands",
+      "New Zealand",
+      "Nigeria",
+      "Norway",
+      "Pakistan",
+      "Peru",
+      "Philippines",
+      "Poland",
+      "Portugal",
+      "Qatar",
+      "Romania",
+      "Russia",
+      "Saudi Arabia",
+      "Singapore",
+      "Slovakia",
+      "Slovenia",
+      "South Africa",
+      "South Korea",
+      "Spain",
+      "Sri Lanka",
+      "Sweden",
+      "Switzerland",
+      "Taiwan",
+      "Turkey",
+      "Ukraine",
+      "United Arab Emirates",
+      "United Kingdom",
+      "United States",
+      "Vietnam",
+      "Yemen",
+      "Zambia",
+      "Zimbabwe"
+      // ถ้าต้องการครบทุกประเทศ เอารายการจาก <option> เดิมมาเติมเพิ่มได้เลย
+    ];
+
+    const input = document.getElementById("v-country");
+    const box   = document.getElementById("country-suggestions");
+
+    if (!input || !box) return;
+
+    function showSuggestions(list) {
+      box.innerHTML = "";
+
+      if (!list.length) {
+        const no = document.createElement("div");
+        no.textContent = "ไม่พบประเทศที่ตรงกับคำค้นหา";
+        no.className = "no-match";
+        box.appendChild(no);
+        box.classList.remove("hidden");
+        return;
+      }
+
+      list.forEach(name => {
+        const item = document.createElement("div");
+        item.textContent = name;
+        item.addEventListener("click", () => {
+          input.value = name;
+          box.classList.add("hidden");
+          input.dispatchEvent(new Event("input"));  // เพื่อให้ logic step ทำงาน
+          input.blur(); // ปิดคีย์บอร์ดบนมือถือ
+        });
+        box.appendChild(item);
+      });
+
+      box.classList.remove("hidden");
+    }
+
+    input.addEventListener("input", () => {
+      const q = input.value.trim().toLowerCase();
+      if (!q) {
+        box.classList.add("hidden");
+        return;
+      }
+
+      // filter แบบเริ่มด้วยตัวอักษร หรือมีตัวอักษรนั้นอยู่
+      const matches = countries.filter(c =>
+        c.toLowerCase().startsWith(q) || c.toLowerCase().includes(q)
+      ).slice(0, 15); // จำกัดไม่เกิน 15 รายการ
+
+      showSuggestions(matches);
+    });
+
+    // คลิกข้างนอก → ปิดกล่อง suggestion
+    document.addEventListener("click", (e) => {
+      if (!box.contains(e.target) && e.target !== input) {
+        box.classList.add("hidden");
+      }
+    });
+  })();
+</script>
 </body>
 </html>
